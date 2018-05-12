@@ -10,8 +10,9 @@
 # (X) Identifica a existência de codigo comentado
 # (X) Identifica operandos declarados, mas não operados
 # ( ) Identifica listas nao atômicas com sintaxe de lista atômica e vice-versa
-# ( ) Identifica a existência ou nao de README
-
+# (X) Identifica a existência ou não de README
+# ( ) Análise do português
+# ( ) Detectar integers que possam causar problemas caso sejam usados para criar vetores
 
 fileName = ""
 list_Names = []
@@ -28,6 +29,8 @@ checkExistenceGrammar = False
 checkExistenceComment = False
 checkExistenceStatement = False
 checkExistenceUnusedVariable = False
+readmeFileDoesNotExists = False
+checkExistenceTopic = False
 countComments = 0
 
 # Abre possibilidade para que usuário selecione um arquivo
@@ -176,12 +179,13 @@ def collectAllVariablesAndCheckExistenceUnusedVariables(fileName):
         da = "Date"
         i = "Integer"
         te = "Text"
+        ti = "Time"
         idxBegVariable = 0
         idxEndVariable = 0
         line = targetFile.readline()
         while line:
             if (line.find(begVariable) != -1):
-                if (line.find(te) == -1 and line.find(cu) == -1 and line.find(re) == -1 and line.find(bo) == -1 and line.find(li) == -1 and line.find(st) == -1 and line.find(da) == -1 and line.find(i) == -1):
+                if (line.find(ti) == -1 and line.find(te) == -1 and line.find(cu) == -1 and line.find(re) == -1 and line.find(bo) == -1 and line.find(li) == -1 and line.find(st) == -1 and line.find(da) == -1 and line.find(i) == -1):
                     idxBegVariable = line.find(begVariable)
                     idxEndVariable = line.find(endVariable)
                     list_DeclaredVariables.append(line[idxBegVariable+2:idxEndVariable])
@@ -216,21 +220,12 @@ def collectAllVariablesAndCheckExistenceUnusedVariables(fileName):
 def checkExistenceReadmeFile(fileName):
     filePath = fileName[:fileName.find("TEMP")]
     import os.path
-    my_file = filePath + "README"
+    my_file = filePath + "README.txt"
+    global readmeFileDoesNotExists
     if (os.path.isfile(my_file)):
         print ("README existe")
     else:
-        print ("README não existe")
-
-
-
-
-
-
-
-    
-
-
+        readmeFileDoesNotExists = True
 
 # Criação de arquivo HTML com relatório das informações relevantes
 def createReport():
@@ -305,6 +300,9 @@ def createReport():
     if (checkExistenceStatement == False):
         message = message + "<tr><th>STATEMENT OF WORK</th></tr> <tr><td>Neste template não há statement of work.</td></tr>"
 
+    if (readmeFileDoesNotExists == True):
+        message = message + "<tr><th>README</th></tr> <tr><td>Não foi criado um arquivo README.txt para este template.</td></tr>"
+
     message = message + """</table></body></html>"""
 
     f.write(message)
@@ -321,4 +319,5 @@ checkExistenceComment(fileName)
 checkExistenceStatements(fileName)
 collectAllVariablesAndCheckExistenceUnusedVariables(fileName)
 checkExistenceReadmeFile(fileName)
+#sscheckTopics(fileName)
 createReport()
