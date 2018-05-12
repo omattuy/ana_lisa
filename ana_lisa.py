@@ -212,10 +212,6 @@ def collectAllVariablesAndCheckExistenceUnusedVariables(fileName):
     collectAllVariables(fileName)
     checkExistenceUnusedVariables(fileName)
 
-# Identifica a existência de listas atômicas com sintaxe incorreta
-
-
-
 # Verifica se foi criado arquivo README
 def checkExistenceReadmeFile(fileName):
     filePath = fileName[:fileName.find("TEMP")]
@@ -319,5 +315,4 @@ checkExistenceComment(fileName)
 checkExistenceStatements(fileName)
 collectAllVariablesAndCheckExistenceUnusedVariables(fileName)
 checkExistenceReadmeFile(fileName)
-#sscheckTopics(fileName)
 createReport()
