@@ -7,6 +7,7 @@
 # ( ) Análise do português
 # ( ) Detectar uso de frases ou expressões em português que possam diminuir a qualidade do texto. Pensar na criação de um arquivo com lista de expressões não recomendadas
 # ( ) Detectar integers que possam causar problemas caso sejam usados para criar vetores
+# ( ) Criar mecanismo no arquivos HTML para permitir que o usuário faça alterações no próprio código quando necessário
 # (X) Uso de statement of work
 # (X) Identificar existência de TODO
 # (X) Identificar existência de FIXME
@@ -112,7 +113,7 @@ def checkExistenceTodos(fileName):
     while line:
         if line.find(todo) != -1:
             todoUnderAnalysis = line[line.find(todo)+7:len(line)]
-            redFlag = "Linha " + str(count) + ":" + todoUnderAnalysis
+            redFlag = "Linha " + str(count) + ": " + todoUnderAnalysis
             list_Todos.append(redFlag)
             checkExistenceTodo = True
         line = targetFile.readline()
@@ -143,13 +144,13 @@ def checkExistenceComment(fileName):
     while line:
         if line.find(idx_beg_comment) != -1 and line.find(idx_end_comment) != -1:
             c = Comment()
+            c.setLineNumberBegComment(lineNumber)
             c.setCompleteComment(line[line.find(idx_beg_comment)+2:line.find(idx_end_comment)])
             list_comments.append(c)
             lineNumber = lineNumber + 1
         elif line.find(idx_beg_comment) != -1 and line.find(idx_end_comment) == -1:
             c = Comment()
             c.setLineNumberBegComment(lineNumber)
-            print('Teste: ', str(c.getLineNumberBegComment()))
             while line.find(idx_end_comment) == -1:
                 comment = comment + line
                 line = targetFile.readline()
@@ -162,6 +163,7 @@ def checkExistenceComment(fileName):
         line = targetFile.readline()
         comment = ""
     targetFile.close()
+    return list_comments
 
 # Identifica a existência de statement no template
 def checkExistenceStatements(fileName):
@@ -300,8 +302,14 @@ def createReport():
         for i in list_UnusedVariables:
             message = message + "<tr><td>" + i + "</td></tr>"
 
-    if checkExistenceComment == True:
-        message = message + "<tr><th>COMENTÁRIOS</th></tr> <tr><td>Este template contém " + str(countComments) + " trechos de código comentado.<tr><td>"
+    list_comments = checkExistenceComment(fileName)
+    print(list_comments)
+    if len(list_comments) > 0:
+        message = message + "<tr><th>COMENTÁRIOS</th></tr> <tr><td>Este template contém " + str(len(list_comments)) + " trechos de código comentado."
+        for c in list_comments:
+            message = message + '<br><br>==================================<br><br>'
+            message = message + 'Linha ' + str(c.getLineNumberBegComment()) + ': <br>'+ c.getCompleteComment()
+        message = message + "<tr><td>"
 
     if checkExistenceGrammar == False:
         message = message + "<tr><th>GRAMMAR</th></tr> <tr><td>O tube grammar() não foi usado em nenhum momento neste template.</tr></td>"

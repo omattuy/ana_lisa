@@ -21,4 +21,121 @@
             }
             </style>
             </head> <body> <center><bold><h2>ANÁLISE DO TEMPLATE 
-            TEMP_Debenture_476.lawtex</h2></bold></center><br><br><table id="relatorio"><tr><th>GRAMMAR</th></tr> <tr><td>O tube grammar() não foi usado em nenhum momento neste template.</tr></td><tr><th>STATEMENT OF WORK</th></tr> <tr><td>Neste template não há statement of work.</td></tr></table></body></html>
+            TEMP_Proposta_Honorarios_BRA_ENG.lawtex</h2></bold></center><br><br><table id="relatorio"><tr><th>COMENTÁRIOS</th></tr> <tr><td>Este template contém 33 trechos de código comentado.<br><br>==================================<br><br>Linha 1: <br>/*
+(21/10/2016) FIXME:
+Há um erro em: TOP_Estimativa_PH. "honorariosHoraTrabalhada" foi usada mas não faz parte do contexto. (linha 3911)
+*/
+<br><br>==================================<br><br>Linha 6: <br>INGLÊS<br><br>==================================<br><br>Linha 8: <br>STRUCTS USADAS NA PROPOSTA DE HONORÁRIOS<br><br>==================================<br><br>Linha 10: <br>SUJEITOS<br><br>==================================<br><br>Linha 765: <br>INFORMAÇÕES BÁSICAS<br><br>==================================<br><br>Linha 813: <br>ESCOPO NÃO CADASTRADO<br><br>==================================<br><br>Linha 911: <br>ESCOPO CADASTRADO<br><br>==================================<br><br>Linha 1017: <br>AUDITORIA - ESCOPO CADASTRADO - PROJETO DE M&A <br><br>==================================<br><br>Linha 1071: <br>PREMISSAS - ACORDO CONFIDENCIALIDADE<br><br>==================================<br><br>Linha 1104: <br>PREMISSAS - ROTINA SOCIETÁRIA<br><br>==================================<br><br>Linha 1128: <br>PREMISSAS - PROJETO DE AQUISIÇÃO<br><br>==================================<br><br>Linha 1203: <br>PREMISSAS - AUDITORIA<br><br>==================================<br><br>Linha 1246: <br>PREMISSAS - CONTRATOS PRELIMINARES<br><br>==================================<br><br>Linha 1279: <br>PREMISSAS - CONTRATOS DEFINITIVOS<br><br>==================================<br><br>Linha 1328: <br>PREMISSAS ADICIONAIS - PROJETO DE AQUISIÇÃO<br><br>==================================<br><br>Linha 1353: <br>INFORMAÇÕES ADICIONAIS DE HONORÁRIOS<br><br>==================================<br><br>Linha 1454: <br>REGRAS DE HONORÁRIOS<br><br>==================================<br><br>Linha 1498: <br>HONORÁRIOS - HORA TRABALHADA<br><br>==================================<br><br>Linha 1891: <br>HONORÁRIOS - FIXOS RECORRENTES<br><br>==================================<br><br>Linha 1959: <br>HONORÁRIOS - FIXO PAGAMENTO ÚNICO<br><br>==================================<br><br>Linha 1982: <br>HONORÁRIOS - FRAÇÃO CAUSA<br><br>==================================<br><br>Linha 2036: <br>HONORÁRIOS - COBRANÇA POR EVENTO<br><br>==================================<br><br>Linha 2125: <br>HONORÁRIOS - COBRANÇA POR NÚMERO DE CASOS<br><br>==================================<br><br>Linha 2199: <br>RESPONSABILIDADE PROFISSIONAL DO ADVOGADO<br><br>==================================<br><br>Linha 2235: <br>FATURAMENTO<br><br>==================================<br><br>Linha 2282: <br>EQUIPE DE TRABALHO<br><br>==================================<br><br>Linha 2311: <br> //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// <br><br>==================================<br><br>Linha 2312: <br>NÓS USADOS NA PROPOSTA DE HONORÁRIOS<br><br>==================================<br><br>Linha 2319: <br>		/*+<cliente> : externs *Cliente_PH,
+		+<meioDeEnvio> : List("By e-mail", "Personnally delivered", "Via courier", "By mail") {
+			name = "Meio de envio"
+			request = "Qual a forma de envio ou entrega da proposta?"
+			default = "By e-mail"
+			atomic = true
+			help = "A forma de envio padrão é por e-mail. Se a forma de envio for correio ou courier, o
+					endereçamento completo torna-se obrigatório."
+		}*/
+<br><br>==================================<br><br>Linha 2444: <br> /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// <br><br>==================================<br><br>Linha 2445: <br>TEMPLATE<br><br>==================================<br><br>Linha 2483: <br>					/*branch[BRC_PropostaNaoCadastrada_PH] {
+						name = "Proposta Não Cadastrada"
+						index = true
+						description = "Branch para criação de proposta de honorários não cadastrada"
+						tags {"Serviços jurídicos", "Tipo de proposta", "Proposta de honorários", "Proposta não cadastrada"}
+						declarations {
+							+<escopoNaoCadastrado> : *EscopoNaoCadastrado_PH,
+							topic[TOP_EscopoNaoCadastrado_PH] {
+								name = "Escopo"
+								index = true
+								description = "Tópico de descrição do escopo de trabalho da prestação de serviços jurídicos"
+								title = "Scope"
+								tags {"Escopo", "Escopo de trabalho", "Serviços jurídicos"}
+								declarations {
+									period[PER_AssessoriaGeral_PH] {
+										name = "Escopo assessoria geral"
+										description = "Período de descrição de escopo de assessoria geral na prestação de serviços jurídicos"
+										tags {"Proposta de honorários", "Serviços jurídicos", "Escopo", "Assessoria geral"}
+										operation {
+											print "Pursuant to the terms of this proposal, we will provide services to "
+													& <cliente>.grammar ("the Client")
+													& " consisting of legal representation before judicial authorities
+													in Brazil and general legal advice in all areas of law."
+										}
+									},
+									period[PER_AssessoriaEspecifica_PH] {
+										name = "Escopo assessoria em assunto específico"
+										description = "Período de descrição de escopo de assessoria em assunto específico"
+										tags {"Proposta de honorários", "Serviços jurídicos", "Escopo", "Assessoria geral"}
+										operation {
+											print "The scope of our legal services is described below.\n"
+								 					& <escopoNaoCadastrado.escopoAssessoriaEspecifica>
+										}
+									},
+									period[PER_AssessoriaProjeto_PH] {
+										name = "Escopo assessoria em projeto"
+										description = "Período de descrição de escopo de assessoria em projeto"
+										tags {"Proposta de honorários", "Serviços jurídicos", "Escopo", "Assessoria em projeto"}
+										operation {
+											print "The scope of our legal services is described below.\n"
+															& <escopoNaoCadastrado.escopoAssessoriaProjeto>
+										}
+									}
+								}
+								operations {
+									if (<escopoNaoCadastrado.tipoDeAssessoria> == "Assessoria geral") {
+										use period[PER_AssessoriaGeral_PH]
+									} elseif (<escopoNaoCadastrado.tipoDeAssessoria> == "Assessoria em assunto específico") {
+										use period[PER_AssessoriaEspecifica_PH]
+									} else {
+										use period[PER_AssessoriaProjeto_PH],
+										if (<escopoNaoCadastrado.desejaIncluirFases>) {
+										 	print "We describe the phases of the project below.\n",
+									 		print bold(<escopoNaoCadastrado.nomeDaFase>) & "\n" & <escopoNaoCadastrado.conteudoDaFase>
+										}
+									}
+								}
+							},
+							topic[TOP_ExcecoesDeEscopo_PH] {
+								name = "Exceções de escopo"
+								index = true
+								description = "Tópico de descrição das exceções de escopo"
+								title = "Scope exceptions"
+								tags {"Escopo", "Escopo de trabalho", "Serviços jurídicos", "Exceções de escopo"}
+								operations {
+									print "Os seguintes assuntos e atividades não fazem parte do escopo dos nossos serviços:\n",
+									print <escopoNaoCadastrado.excecoesDeEscopo>
+								}
+							},
+							topic[TOP_PremissasDeEscopo_PH] {
+								name = "Premissas de escopo"
+								index = true
+								description = "Tópico de descrição das premissas de escopo"
+								title = "Assumptions"
+								tags {"Escopo", "Escopo de trabalho", "Serviços jurídicos", "Premissas de escopo"}
+								operations {
+									print "The following matters and activities are not included in our scope of services:\n",
+									print <escopoNaoCadastrado.premissasDeEscopo>
+								}
+							}
+						}
+						operations {
+							use topic[TOP_EscopoNaoCadastrado_PH],
+							if (<escopoNaoCadastrado.desejaIncluirExcecoesDeEscopo>) {
+								use topic[TOP_ExcecoesDeEscopo_PH]
+							},
+							if (<escopoNaoCadastrado.haveraPremissasDeEscopo>) {
+								use topic[TOP_PremissasDeEscopo_PH]
+							}
+						}
+					},*/
+<br><br>==================================<br><br>Linha 3741: <br>										/*if (<honorariosHoraTrabalhada.tipoDeLimiteGlobal> == "Limite baseado em número de horas") {
+											if (<honorariosHoraTrabalhada.tipoDeLimiteDeHorasDoLimiteGlobal> == "Mínimo" OR <honorariosHoraTrabalhada.tipoDeLimiteDeHorasDoLimiteGlobal> == "Mínimo e máximo") {
+												use period[PER_HonorariosHoraTrabalhadaLimiteGlobalMinimoHoras]
+											} elseif (<honorariosHoraTrabalhada.tipoDeLimiteDeHorasDoLimiteGlobal> == "Máximo" OR <honorariosHoraTrabalhada.tipoDeLimiteDeHorasDoLimiteGlobal> == "Mínimo e máximo") {
+												use period[PER_HonorariosHoraTrabalhadaLimiteGlobalMaximoHoras]
+											}
+										} else {
+											if (<honorariosHoraTrabalhada.tipoDeLimiteDeValorDoLimiteGlobal> == "Mínimo" OR <honorariosHoraTrabalhada.tipoDeLimiteDeHorasDoLimiteGlobal> == "Mínimo e máximo") {
+												use period[PER_HonorariosHoraTrabalhadaLimiteGlobalMinimoValor]
+											} elseif (<honorariosHoraTrabalhada.tipoDeLimiteDeValorDoLimiteGlobal> == "Máximo" OR <honorariosHoraTrabalhada.tipoDeLimiteDeHorasDoLimiteGlobal> == "Mínimo e máximo") {
+												use period[PER_HonorariosHoraTrabalhadaLimiteGlobalMaximoValor]
+											}
+										}*/
+<tr><td><tr><th>GRAMMAR</th></tr> <tr><td>O tube grammar() não foi usado em nenhum momento neste template.</tr></td><tr><th>STATEMENT OF WORK</th></tr> <tr><td>Neste template não há statement of work.</td></tr></table></body></html>
