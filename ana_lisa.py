@@ -19,23 +19,7 @@
 from comments import Comment
 
 fileName = ""
-list_Names = []
-list_Requests = []
-list_Fixmes = []
-list_Todos = []
-list_DeclaredVariables = []
-list_UnusedVariables = []
-checkExistenceLargeName = False
-checkExistenceLargeRequest = False
-checkExistenceFixme = False
-checkExistenceTodo = False
-checkExistenceGrammar = False
-checkExistenceComment = False
-checkExistenceStatement = False
-checkExistenceUnusedVariable = False
-readmeFileDoesNotExists = False
 checkExistenceTopic = False
-countComments = 0
 
 # Abre possibilidade para que usuário selecione um arquivo
 def selectFile():
@@ -49,8 +33,7 @@ def selectFile():
 # Verifica se há names com número de caracteres que sejam maiores que 100
 def checkNameSize(fileName):
     targetFile = open(fileName, "r", encoding="utf-8")
-    global list_Names
-    global checkExistenceLargeName
+    list_Names = []
     name = "name = "
     line = targetFile.readline()
     count = 1
@@ -60,16 +43,15 @@ def checkNameSize(fileName):
             if (len(nameUnderAnalysis) > 100):
                 redFlag = ("Linha " + str(count) + ": " + nameUnderAnalysis)
                 list_Names.append(redFlag)
-                checkExistenceLargeName = True
         line = targetFile.readline()
         count = count + 1
     targetFile.close()
+    return list_Names
 
 # Verifica se há requests com número de caracteres que sejam maiores que 100
 def checkRequestSize(fileName):
     targetFile = open(fileName, "r", encoding="utf-8")
-    global checkExistenceLargeRequest
-    global list_Requests
+    list_Requests = []
     request = "request = "
     line = targetFile.readline()
     count = 1
@@ -79,16 +61,15 @@ def checkRequestSize(fileName):
             if (len(requestUnderAnalysis) > 100):
                 redFlag = "Linha " + str(count) + ": " + requestUnderAnalysis
                 list_Requests.append(redFlag)
-                checkExistenceLargeRequest = True
         line = targetFile.readline()
         count = count + 1
     targetFile.close()
+    return list_Requests
 
 # Identifica a existência de FIXMEs
 def checkExistenceFixmes(fileName):
     targetFile = open(fileName, "r", encoding="utf-8")
-    global checkExistenceFixme
-    global list_Fixmes
+    list_Fixmes = []
     fixme = "FIXME"
     line = targetFile.readline()
     count = 1
@@ -97,16 +78,15 @@ def checkExistenceFixmes(fileName):
             fixmeUnderAnalysis = line[line.find(fixme)+6:len(line)]
             redFlag = "Linha " + str(count) + ":" + fixmeUnderAnalysis
             list_Fixmes.append(redFlag)
-            checkExistenceFixme = True
         line = targetFile.readline()
         count = count + 1
     targetFile.close()
+    return list_Fixmes
 
 # Identifica a existência de TODO
 def checkExistenceTodos(fileName):
     targetFile = open(fileName, "r", encoding="utf-8")
-    global checkExistenceTodo
-    global list_Todos
+    list_Todos = []
     todo = "// TODO"
     line = targetFile.readline()
     count = 1
@@ -115,15 +95,15 @@ def checkExistenceTodos(fileName):
             todoUnderAnalysis = line[line.find(todo)+7:len(line)]
             redFlag = "Linha " + str(count) + ": " + todoUnderAnalysis
             list_Todos.append(redFlag)
-            checkExistenceTodo = True
         line = targetFile.readline()
         count = count + 1
     targetFile.close()
+    return list_Todos
 
 # Identifica a existência do tube Grammar()
 def checkExistenceGrammarTube(fileName):
     targetFile = open(fileName, "r", encoding="utf-8")
-    global checkExistenceGrammar
+    checkExistenceGrammar = False
     grammar = "grammar("
     line = targetFile.readline()
     while line:
@@ -131,8 +111,9 @@ def checkExistenceGrammarTube(fileName):
             checkExistenceGrammar = True
         line = targetFile.readline()
     targetFile.close()
+    return checkExistenceGrammar
 
-# Identifica a existência de codigo comentado
+# Identifica a existência de código comentado
 def checkExistenceComment(fileName):
     targetFile = open(fileName, "r", encoding="utf-8")
     lineNumber = 1
@@ -168,7 +149,7 @@ def checkExistenceComment(fileName):
 # Identifica a existência de statement no template
 def checkExistenceStatements(fileName):
     targetFile = open(fileName, "r", encoding="utf-8")
-    global checkExistenceStatement
+    checkExistenceStatement = False
     statement = "Statement"
     line = targetFile.readline()
     while line:
@@ -176,6 +157,7 @@ def checkExistenceStatements(fileName):
             checkExistenceStatement = True
         line = targetFile.readline()
     targetFile.close()
+    return checkExistenceStatement
 
 # Identifica operandos declarados, mas não operados
 def collectAllVariablesAndCheckExistenceUnusedVariables(fileName):
@@ -183,7 +165,7 @@ def collectAllVariablesAndCheckExistenceUnusedVariables(fileName):
     # Identifica todos os operandos declarados (tipo Struct apenas)
     def collectAllVariables(fileName):
         targetFile = open(fileName, "r", encoding="utf-8")
-        global list_DeclaredVariables
+        list_DeclaredVariables = []
         begVariable = "+<"
         endVariable = "> : "
         cu = "Currency"
@@ -206,12 +188,13 @@ def collectAllVariablesAndCheckExistenceUnusedVariables(fileName):
                     list_DeclaredVariables.append(line[idxBegVariable+2:idxEndVariable])
             line = targetFile.readline()
         targetFile.close()
+        return list_DeclaredVariables
 
     # Identifica operandos (tipo Struct apenas) não operados
     def checkExistenceUnusedVariables(fileName):
+        list_DeclaredVariables = collectAllVariables(fileName)
         targetFile = open(fileName, "r", encoding="utf-8")
-        global list_UnusedVariables
-        global list_DeclaredVariables
+        list_UnusedVariables = []
         for u in list_DeclaredVariables:
             count = 0
             line = targetFile.readline()
@@ -223,21 +206,23 @@ def collectAllVariablesAndCheckExistenceUnusedVariables(fileName):
                 list_UnusedVariables.append(u)
             targetFile.seek(0)
         targetFile.close()
+        return list_UnusedVariables
 
-    collectAllVariables(fileName)
-    checkExistenceUnusedVariables(fileName)
+    list_UnusedVariables = checkExistenceUnusedVariables(fileName)
+    return list_UnusedVariables
 
 # Verifica se foi criado arquivo README
 def checkExistenceReadmeFile(fileName):
+    readmeFileDoesNotExists = False
     if fileName.find("TEMP_") != -1:
         filePath = fileName[:fileName.find("TEMP_")]
     elif fileName.find("FRM_") != -1:
         filePath = fileName[:fileName.find("FRM_")]
     import os.path
     my_file = filePath + "README.txt"
-    global readmeFileDoesNotExists
     if os.path.isfile(my_file) == False:
         readmeFileDoesNotExists = True
+    return readmeFileDoesNotExists
 
 # Criação de arquivo HTML com relatório das informações relevantes
 def createReport():
@@ -277,63 +262,57 @@ def createReport():
     message = message + shortFileName + """</h2></bold></center>"""
     message = message + """<br><br><table id="relatorio">"""
 
-    if checkExistenceLargeName == True:
+    list_Names = checkNameSize(fileName)
+    if len(list_Names) > 0:
         message = message + "<tr><th>NAMES COM MAIS DO QUE 100 CARACTERES</th></tr>"
         for i in list_Names:
             message = message + "<tr><td>" + i + "</td></tr>"
 
-    if checkExistenceLargeRequest == True:
+    list_Requests = checkRequestSize(fileName)
+    if len(list_Requests) > 0:
         message = message + "<tr><th>REQUESTS COM MAIS DO QUE 100 CARACTERES</th></tr>"
         for i in list_Requests:
             message = message + "<tr><td>" + i + "</td></tr>"
 
-    if checkExistenceFixme == True:
+    list_Fixmes = checkExistenceFixmes(fileName)
+    if len(list_Fixmes) > 0:
         message = message + "<tr><th>FIXMEs</th></tr>"
         for i in list_Fixmes:
             message = message + "<tr><td>" + i + "</td></tr>"
 
-    if checkExistenceTodo == True:
+    list_Todos = checkExistenceTodos(fileName)
+    if len(list_Todos) > 0:
         message = message + "<tr><th>TODOs</th></tr>"
         for i in list_Todos:
             message = message + "<tr><td>" + i + "</td></tr>"
 
+    list_UnusedVariables = collectAllVariablesAndCheckExistenceUnusedVariables(fileName)
     if len(list_UnusedVariables) > 0:
         message = message + "<tr><th>OPERANDOS DECLARADOS, MAS NÃO OPERADOS</th></tr>"
         for i in list_UnusedVariables:
             message = message + "<tr><td>" + i + "</td></tr>"
 
     list_comments = checkExistenceComment(fileName)
-    print(list_comments)
     if len(list_comments) > 0:
         message = message + "<tr><th>COMENTÁRIOS</th></tr> <tr><td>Este template contém " + str(len(list_comments)) + " trechos de código comentado."
         for c in list_comments:
             message = message + '<br><br>==================================<br><br>'
-            message = message + 'Linha ' + str(c.getLineNumberBegComment()) + ': <br>'+ c.getCompleteComment()
+            message = message + 'Linha ' + str(c.getLineNumberBegComment()) + ': ' + c.getCompleteComment()
         message = message + "<tr><td>"
 
-    if checkExistenceGrammar == False:
+    if checkExistenceGrammarTube(fileName) == False:
         message = message + "<tr><th>GRAMMAR</th></tr> <tr><td>O tube grammar() não foi usado em nenhum momento neste template.</tr></td>"
 
-    if checkExistenceStatement == False:
+    if checkExistenceStatements(fileName) == False:
         message = message + "<tr><th>STATEMENT OF WORK</th></tr> <tr><td>Neste template não há statement of work.</td></tr>"
 
-    if readmeFileDoesNotExists == True:
+    if checkExistenceReadmeFile(fileName) == True:
         message = message + "<tr><th>README</th></tr> <tr><td>Não foi criado um arquivo README.txt para este template.</td></tr>"
 
     message = message + """</table></body></html>"""
-
     f.write(message)
     f.close()
     webbrowser.open_new_tab('Relatorio.html')
 
 selectFile()
-#checkNameSize(fileName)
-#checkRequestSize(fileName)
-#checkExistenceFixmes(fileName)
-#checkExistenceTodos(fileName)
-#checkExistenceGrammarTube(fileName)
-checkExistenceComment(fileName)
-#checkExistenceStatements(fileName)
-#collectAllVariablesAndCheckExistenceUnusedVariables(fileName)
-#checkExistenceReadmeFile(fileName)
 createReport()
