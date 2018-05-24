@@ -5,7 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Relatorio.html" beforeDir="false" afterPath="$PROJECT_DIR$/Relatorio.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ana_lisa.py" beforeDir="false" afterPath="$PROJECT_DIR$/ana_lisa.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teste_2.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,8 +18,22 @@
       <file leaf-file-name="ana_lisa.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ana_lisa.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="298" column="84" lean-forward="true" selection-start-line="298" selection-start-column="84" selection-end-line="298" selection-end-column="84" />
+            <state relative-caret-position="252">
+              <caret line="453" column="76" lean-forward="true" selection-start-line="449" selection-end-line="453" selection-end-column="76" />
+              <folding>
+                <element signature="e#1001#1029#0" expanded="true" />
+                <element signature="e#3663#4802#1" />
+                <element signature="e#4925#5370#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="topics.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/topics.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="96">
+              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
             </state>
           </provider>
         </entry>
@@ -29,36 +42,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>list_Fixmes</find>
-      <find>list_Todos</find>
-      <find>checkExistenceTodo</find>
-      <find>checkExistenceGrammar</find>
-      <find>checkExistenceUnusedVariable</find>
-      <find>checkExistenceUnusedVariable =</find>
-      <find>= []</find>
-      <find>collectAllVariables</find>
-      <find>checkExistenceUnusedVariables</find>
-      <find>list_UnusedVariables</find>
-      <find>checkExistenceTopic</find>
-      <find>countComments</find>
-      <find>checkexistencefixme</find>
-      <find>checkexistencetodo</find>
-      <find>dw</find>
-      <find>readmeFileDoesNotExists</find>
-      <find>collectAllVariables(</find>
-      <find>list_DeclaredVariables</find>
-      <find>checkExistenceReadmeFile</find>
-      <find>collectAllVariablesAndCheckExistenceUnusedVariables</find>
-      <find>checkExistenceStatements</find>
-      <find>checkExistenceComment</find>
-      <find>checkExistenceGrammarTube</find>
-      <find>checkExistenceTodos</find>
-      <find>checkExistenceFixmes</find>
-      <find>checkRequestSize</find>
-      <find>checkNameSize</find>
-      <find>createReport</find>
-      <find>shortFileName</find>
-      <find>list_comments</find>
+      <find>count_opening</find>
+      <find>line = targetFile.readline()</find>
+      <find>seek(</find>
+      <find>list_topics</find>
+      <find>checkStaticTopics(fileName</find>
+      <find>fileName</find>
+      <find>checkStaticTopics(</find>
+      <find>seek</find>
+      <find>targetFile</find>
+      <find>checkTotalNumberTopics</find>
+      <find>.seek(0</find>
+      <find>targetFile.seek(</find>
+      <find>targetFile.seek(0</find>
+      <find>getFile.seek(</find>
+      <find>staticTopics(</find>
+      <find>21/10/2016</find>
+      <find>/*SUJEITOS*/</find>
+      <find>list_all_topics</find>
+      <find>checkStaticTopics</find>
+      <find>staticTopics</find>
+      <find>collectionAllTopics</find>
+      <find>static</find>
+      <find>topic = line</find>
+      <find>t = Topic()</find>
+      <find>not in</find>
+      <find>collectAllTopics</find>
+      <find>c</find>
+      <find>collectStaticTopics</find>
+      <find>list_static_topics</find>
+      <find>OPERANDOS DECLARADOS, MAS NÃO OPERADOS</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -70,13 +83,15 @@
         <option value="$PROJECT_DIR$/teste_2.py" />
         <option value="$PROJECT_DIR$/teste.py" />
         <option value="$PROJECT_DIR$/comments.py" />
+        <option value="$PROJECT_DIR$/Topic.py" />
+        <option value="$PROJECT_DIR$/topics.py" />
         <option value="$PROJECT_DIR$/ana_lisa.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="714" />
-    <option name="y" value="32" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
     <option name="width" value="858" />
     <option name="height" value="688" />
   </component>
@@ -100,7 +115,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../birthday_reminder" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RunDashboard">
@@ -180,16 +195,16 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="1" weight="0.1669107" />
+      <window_info content_ui="combo" id="Project" order="1" weight="0.11859444" />
       <window_info anchor="bottom" id="TODO" order="10" />
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="3" />
-      <window_info anchor="bottom" id="Python Console" order="0" weight="0.8481848" />
-      <window_info anchor="bottom" id="Run" order="6" weight="0.45379537" />
+      <window_info anchor="bottom" id="Python Console" order="0" weight="0.73432344" />
+      <window_info anchor="bottom" id="Run" order="6" weight="0.47359735" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="1" />
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="7" weight="0.50825083" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -200,16 +215,16 @@
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Run" order="6" weight="0.45379537" />
+      <window_info anchor="bottom" id="Run" order="6" weight="0.5874587" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.1669107" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.11859444" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="10" />
       <window_info anchor="bottom" id="Find" order="5" />
-      <window_info anchor="bottom" id="Python Console" order="0" weight="0.8481848" />
-      <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
+      <window_info anchor="bottom" id="Python Console" order="0" weight="0.73432344" />
+      <window_info anchor="bottom" id="Debug" order="7" weight="0.50825083" />
       <window_info anchor="bottom" id="Terminal" order="1" />
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
@@ -221,7 +236,45 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="4" />
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/ana_lisa.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2496">
+          <caret line="104" column="22" lean-forward="true" selection-start-line="104" selection-start-column="22" selection-end-line="104" selection-end-column="22" />
+          <folding>
+            <element signature="e#1001#1029#0" expanded="true" />
+            <element signature="e#3663#4802#1" />
+            <element signature="e#4925#5370#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/comments.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="624">
+          <caret line="26" column="21" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ana_lisa.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4656">
+          <caret line="194" column="9" selection-start-line="194" selection-start-column="9" selection-end-line="194" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ana_lisa.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5568">
+          <caret line="232" column="5" selection-start-line="232" selection-start-column="5" selection-end-line="232" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ana_lisa.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1584">
@@ -294,13 +347,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/comments.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="26" column="21" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Relatorio.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
@@ -308,10 +354,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/comments.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="341">
+          <caret line="26" column="21" selection-end-line="30" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/topics.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ana_lisa.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="298" column="84" lean-forward="true" selection-start-line="298" selection-start-column="84" selection-end-line="298" selection-end-column="84" />
+        <state relative-caret-position="252">
+          <caret line="453" column="76" lean-forward="true" selection-start-line="449" selection-end-line="453" selection-end-column="76" />
+          <folding>
+            <element signature="e#1001#1029#0" expanded="true" />
+            <element signature="e#3663#4802#1" />
+            <element signature="e#4925#5370#0" />
+          </folding>
         </state>
       </provider>
     </entry>

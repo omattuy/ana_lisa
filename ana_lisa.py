@@ -17,9 +17,9 @@
 # (X) Identifica a existência ou não de README
 
 from comments import Comment
+from topics import Topic
 
 fileName = ""
-checkExistenceTopic = False
 
 # Abre possibilidade para que usuário selecione um arquivo
 def selectFile():
@@ -82,6 +82,109 @@ def checkExistenceFixmes(fileName):
         count = count + 1
     targetFile.close()
     return list_Fixmes
+
+# Identifica a quantidade total de tópicos no template
+def checkTotalNumberTopics(fileName):
+    targetFile = open(fileName, "r", encoding="utf-8")
+    count_total_number_topics = 0
+    line = targetFile.readline()
+    while line:
+        if line.find('topic') != -1 and line.find('{') != -1:
+            count_total_number_topics += 1
+        line = targetFile.readline()
+    targetFile.close()
+    return count_total_number_topics
+
+# Identifica a existência de tópicos estáticos
+"""
+def checkStaticTopics(fileName, list_topics):
+    targetFile = open(fileName, "r", encoding="utf-8")
+    count_beg_topic = 0
+    line = targetFile.readline()
+    while line:
+        if line.find('topic') != -1 and line.find('{') != -1:
+            t = Topic()
+            t.setLineNumberBegTopic = count_beg_topic
+            topic = line
+            count_opening = 1
+            count_closing = 0
+            line = targetFile.readline()
+            while count_opening > count_closing:
+                topic = topic + line
+                if line.find('{') != -1 and line.find('}') == -1:
+                    count_opening += 1
+                elif line.find('{') == -1 and line.find('}') != -1:
+                    count_closing += 1
+                elif line.find('{') != -1 and line.find('}') != -1:
+                    count_opening += 1
+                    count_closing += 1
+                line = targetFile.readline()
+            t.setCompleteTopic(topic)
+            list_topics.append(t)
+        line = targetFile.readline()
+        count_beg_topic = count_beg_topic + 1
+    targetFile.close()
+    return list_topics
+"""
+
+def collectStaticTopics(fileName):
+    # Identifica o nome de tópicos no template
+    def checkNamesAllTopics(fileName):
+        targetFile = open(fileName, "r", encoding="utf-8")
+        line = targetFile.readline()
+        name_all_topics = []
+        while line:
+            if line.find('topic') != -1 and line.find('{') != -1:
+                t = Topic()
+                t.setNameTopic(line[line.find('topic'):line.find('{')+1])
+                name_all_topics.append(t)
+            line = targetFile.readline()
+        targetFile.close()
+        return name_all_topics
+
+    # Identifica todos os tópicos no template
+    def createListTopics(fileName, name_all_topics):
+        targetFile = open(fileName, "r", encoding="utf-8")
+        list_topics = []
+        for name in name_all_topics:
+            line = targetFile.readline()
+            while line:
+                if line.find(name.getNameTopic()) != -1:
+                    t = Topic()
+                    topic = line
+                    count_opening = 1
+                    count_closing = 0
+                    line = targetFile.readline()
+                    while count_opening > count_closing:
+                        topic = topic + line
+                        if line.find('{') != -1 and line.find('}') == -1:
+                            count_opening += 1
+                        elif line.find('{') == -1 and line.find('}') != -1:
+                            count_closing += 1
+                        elif line.find('{') != -1 and line.find('}') != -1:
+                            count_opening += 1
+                            count_closing += 1
+                        line = targetFile.readline()
+                    t.setCompleteTopic(topic)
+                    t.setNameTopic(name.getNameTopic())
+                    list_topics.append(t)
+                line = targetFile.readline()
+            targetFile.seek(0)
+        targetFile.close()
+        return list_topics
+
+    # Identifica a existência de tópicos estáticos
+    def collectOnlyStaticTopics(list_all_topics):
+        list_static_topics = []
+        for t in list_all_topics:
+            if 'if' not in t.getCompleteTopic():
+                list_static_topics.append(t)
+        return list_static_topics
+
+    name_all_topics = checkNamesAllTopics(fileName)
+    list_all_topics = createListTopics(fileName, name_all_topics)
+    list_static_topics = collectOnlyStaticTopics(list_all_topics)
+    return list_static_topics
 
 # Identifica a existência de TODO
 def checkExistenceTodos(fileName):
@@ -160,14 +263,14 @@ def checkExistenceStatements(fileName):
     return checkExistenceStatement
 
 # Identifica operandos declarados, mas não operados
-def collectAllVariablesAndCheckExistenceUnusedVariables(fileName):
+def collectAllVariablesAndCheckExistenceUnusedStructs(fileName):
 
     # Identifica todos os operandos declarados (tipo Struct apenas)
-    def collectAllVariables(fileName):
+    def collectAllStructs(fileName, begVariable, endVariable):
         targetFile = open(fileName, "r", encoding="utf-8")
-        list_DeclaredVariables = []
-        begVariable = "+<"
-        endVariable = "> : "
+        list_DeclaredStructs = []
+        begVariable = begVariable
+        endVariable = endVariable
         cu = "Currency"
         re = "Real"
         bo = "Boolean"
@@ -185,17 +288,17 @@ def collectAllVariablesAndCheckExistenceUnusedVariables(fileName):
                 if (line.find(ti) == -1 and line.find(te) == -1 and line.find(cu) == -1 and line.find(re) == -1 and line.find(bo) == -1 and line.find(li) == -1 and line.find(st) == -1 and line.find(da) == -1 and line.find(i) == -1):
                     idxBegVariable = line.find(begVariable)
                     idxEndVariable = line.find(endVariable)
-                    list_DeclaredVariables.append(line[idxBegVariable+2:idxEndVariable])
+                    list_DeclaredStructs.append(line[idxBegVariable+2:idxEndVariable])
             line = targetFile.readline()
         targetFile.close()
-        return list_DeclaredVariables
+        return list_DeclaredStructs
 
     # Identifica operandos (tipo Struct apenas) não operados
-    def checkExistenceUnusedVariables(fileName):
-        list_DeclaredVariables = collectAllVariables(fileName)
+    def checkExistenceUnusedStructs(fileName):
+        list_DeclaredStructs = collectAllStructs(fileName, "+<", "> : ")
         targetFile = open(fileName, "r", encoding="utf-8")
-        list_UnusedVariables = []
-        for u in list_DeclaredVariables:
+        list_UnusedStructs = []
+        for u in list_DeclaredStructs:
             count = 0
             line = targetFile.readline()
             while line:
@@ -203,11 +306,53 @@ def collectAllVariablesAndCheckExistenceUnusedVariables(fileName):
                     count = count + 1
                 line = targetFile.readline()
             if count == 0:
+                list_UnusedStructs.append(u)
+            targetFile.seek(0)
+        targetFile.close()
+        return list_UnusedStructs
+
+    list_UnusedStructs = checkExistenceUnusedStructs(fileName)
+    return list_UnusedStructs
+
+# Identifica operandos declarados, mas não operados
+def collectAllVariablesAndCheckExistenceUnusedVariables(fileName):
+
+    # Identifica todos os operandos declarados (tipos primitivos apenas)
+    def collectAllVariables(fileName, begVariable, endVariable):
+        targetFile = open(fileName, "r", encoding="utf-8")
+        list_DeclaredVariables = []
+        begVariable = begVariable
+        endVariable = endVariable
+        idxBegVariable = 0
+        idxEndVariable = 0
+        line = targetFile.readline()
+        while line:
+            if line.find(begVariable) != -1:
+                if (line.find('*') == -1 and line.find('struct') == -1):
+                    idxBegVariable = line.find(begVariable)
+                    idxEndVariable = line.find(endVariable)
+                    list_DeclaredVariables.append(line[idxBegVariable+2:idxEndVariable])
+            line = targetFile.readline()
+        targetFile.close()
+        return list_DeclaredVariables
+
+    # Identifica operandos (tipos primitivos apenas) não structs
+    def checkExistenceUnusedVariables(fileName):
+        list_DeclaredVariables = collectAllVariables(fileName, "+<", "> : ")
+        targetFile = open(fileName, "r", encoding="utf-8")
+        list_UnusedVariables = []
+        for u in list_DeclaredVariables:
+            count = 0
+            line = targetFile.readline()
+            while line:
+                if line.find(u) != -1:
+                    count = count + 1
+                line = targetFile.readline()
+            if count == 1:
                 list_UnusedVariables.append(u)
             targetFile.seek(0)
         targetFile.close()
         return list_UnusedVariables
-
     list_UnusedVariables = checkExistenceUnusedVariables(fileName)
     return list_UnusedVariables
 
@@ -252,8 +397,7 @@ def createReport():
                 color: white;
             }
             </style>
-            </head> <body> <center><bold><h2>ANÁLISE DO TEMPLATE 
-            """
+            </head> <body> <center><bold><h2>ANÁLISE DO TEMPLATE - """
 
     if fileName.find("TEMP_") != -1:
         shortFileName = fileName[fileName.find("TEMP_"):len(fileName)]
@@ -287,9 +431,12 @@ def createReport():
             message = message + "<tr><td>" + i + "</td></tr>"
 
     list_UnusedVariables = collectAllVariablesAndCheckExistenceUnusedVariables(fileName)
-    if len(list_UnusedVariables) > 0:
+    list_UnusedStructs = collectAllVariablesAndCheckExistenceUnusedStructs(fileName)
+    list_all_unused_variables_structs = list_UnusedVariables + list_UnusedStructs
+
+    if len(list_all_unused_variables_structs) > 0:
         message = message + "<tr><th>OPERANDOS DECLARADOS, MAS NÃO OPERADOS</th></tr>"
-        for i in list_UnusedVariables:
+        for i in list_all_unused_variables_structs:
             message = message + "<tr><td>" + i + "</td></tr>"
 
     list_comments = checkExistenceComment(fileName)
@@ -297,8 +444,14 @@ def createReport():
         message = message + "<tr><th>COMENTÁRIOS</th></tr> <tr><td>Este template contém " + str(len(list_comments)) + " trechos de código comentado."
         for c in list_comments:
             message = message + '<br><br>==================================<br><br>'
-            message = message + 'Linha ' + str(c.getLineNumberBegComment()) + ': ' + c.getCompleteComment()
+            message = message + 'Linha ' + str(c.getLineNumberBegComment()) + ': <br>'+ c.getCompleteComment()
         message = message + "<tr><td>"
+
+    list_static_topics = collectStaticTopics(fileName)
+    if len(list_static_topics) > 0:
+        message = message + "<tr><th>TÓPICOS ESTÁTICOS (SEM LÓGICA INTERNA)</th></tr>"
+        for i in list_static_topics:
+            message = message + "<tr><td>" + i.getNameTopic() + "</td></tr>"
 
     if checkExistenceGrammarTube(fileName) == False:
         message = message + "<tr><th>GRAMMAR</th></tr> <tr><td>O tube grammar() não foi usado em nenhum momento neste template.</tr></td>"
