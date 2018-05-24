@@ -83,52 +83,9 @@ def checkExistenceFixmes(fileName):
     targetFile.close()
     return list_Fixmes
 
-# Identifica a quantidade total de tópicos no template
-def checkTotalNumberTopics(fileName):
-    targetFile = open(fileName, "r", encoding="utf-8")
-    count_total_number_topics = 0
-    line = targetFile.readline()
-    while line:
-        if line.find('topic') != -1 and line.find('{') != -1:
-            count_total_number_topics += 1
-        line = targetFile.readline()
-    targetFile.close()
-    return count_total_number_topics
-
-# Identifica a existência de tópicos estáticos
-"""
-def checkStaticTopics(fileName, list_topics):
-    targetFile = open(fileName, "r", encoding="utf-8")
-    count_beg_topic = 0
-    line = targetFile.readline()
-    while line:
-        if line.find('topic') != -1 and line.find('{') != -1:
-            t = Topic()
-            t.setLineNumberBegTopic = count_beg_topic
-            topic = line
-            count_opening = 1
-            count_closing = 0
-            line = targetFile.readline()
-            while count_opening > count_closing:
-                topic = topic + line
-                if line.find('{') != -1 and line.find('}') == -1:
-                    count_opening += 1
-                elif line.find('{') == -1 and line.find('}') != -1:
-                    count_closing += 1
-                elif line.find('{') != -1 and line.find('}') != -1:
-                    count_opening += 1
-                    count_closing += 1
-                line = targetFile.readline()
-            t.setCompleteTopic(topic)
-            list_topics.append(t)
-        line = targetFile.readline()
-        count_beg_topic = count_beg_topic + 1
-    targetFile.close()
-    return list_topics
-"""
-
+# Coleta de tópicos estáticos
 def collectStaticTopics(fileName):
-    # Identifica o nome de tópicos no template
+    # Identifica o nome de todos os tópicos no template
     def checkNamesAllTopics(fileName):
         targetFile = open(fileName, "r", encoding="utf-8")
         line = targetFile.readline()
@@ -142,8 +99,8 @@ def collectStaticTopics(fileName):
         targetFile.close()
         return name_all_topics
 
-    # Identifica todos os tópicos no template
-    def createListTopics(fileName, name_all_topics):
+    # Coleta todos os tópicos no template
+    def collectAllTopics(fileName, name_all_topics):
         targetFile = open(fileName, "r", encoding="utf-8")
         list_topics = []
         for name in name_all_topics:
@@ -166,14 +123,14 @@ def collectStaticTopics(fileName):
                             count_closing += 1
                         line = targetFile.readline()
                     t.setCompleteTopic(topic)
-                    t.setNameTopic(name.getNameTopic())
+                    t.setNameTopic(name.getNameTopic()[:name.getNameTopic().find(' ')])
                     list_topics.append(t)
                 line = targetFile.readline()
             targetFile.seek(0)
         targetFile.close()
         return list_topics
 
-    # Identifica a existência de tópicos estáticos
+    # Coleta apenas os tópicos estáticos
     def collectOnlyStaticTopics(list_all_topics):
         list_static_topics = []
         for t in list_all_topics:
@@ -182,7 +139,7 @@ def collectStaticTopics(fileName):
         return list_static_topics
 
     name_all_topics = checkNamesAllTopics(fileName)
-    list_all_topics = createListTopics(fileName, name_all_topics)
+    list_all_topics = collectAllTopics(fileName, name_all_topics)
     list_static_topics = collectOnlyStaticTopics(list_all_topics)
     return list_static_topics
 
