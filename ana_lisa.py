@@ -1,21 +1,3 @@
-# ( ) Uso de estruturas globais
-# ( ) Uso de constantes
-# ( ) Uso de flags de preliminares
-# ( ) Uso de estruturas muito conhecidas
-# ( ) Uso de estrutura mínima de um frame
-# ( ) Identifica listas nao atômicas com sintaxe de lista atômica e vice-versa
-# ( ) Análise do português
-# ( ) Detectar uso de frases ou expressões em português que possam diminuir a qualidade do texto. Pensar na criação de um arquivo com lista de expressões não recomendadas
-# ( ) Detectar integers que possam causar problemas caso sejam usados para criar vetores
-# ( ) Criar mecanismo no arquivos HTML para permitir que o usuário faça alterações no próprio código quando necessário
-# (X) Uso de statement of work
-# (X) Identificar existência de TODO
-# (X) Identificar existência de FIXME
-# (X) Verificar se o número de caracteres nos names e requests não ultrapasse 100
-# (X) Identifica a existência de codigo comentado
-# (X) Identifica operandos declarados, mas não operados
-# (X) Identifica a existência ou não de README
-
 from comments import Comment
 from topics import Topic
 
