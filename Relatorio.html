@@ -20,57 +20,104 @@
                 color: white;
             }
             </style>
-            </head> <body> <center><bold><h2>ANÁLISE DO TEMPLATE - TEMP_ContestacaoTrabalhista(Unilever).lawtex</h2></bold></center><br><br><table id="relatorio"><tr><th>NAMES COM MAIS DO QUE 100 CARACTERES</th></tr><tr><td>Linha 1314: "Pedido de reconhecimento de vínculo empregatício com a primeira reclamada. Diferenças de verbas rescisórias e entrega de guias."</td></tr><tr><td>Linha 1330: "Pedido de reversão da justa causa aplicada a parte reclamante. Diferenças de verbas rescisórias e entrega de guias."</td></tr><tr><th>REQUESTS COM MAIS DO QUE 100 CARACTERES</th></tr><tr><td>Linha 100: "Data de registro do desligamento. Deixe em branco se a parte reclamante ainda trabalha para a reclamada"</td></tr><tr><td>Linha 156: "Insira a posição na qual a ora reclamada figura na presente demanda. Veja o help para mais detalhes."</td></tr><tr><th>FIXMEs</th></tr><tr><td>Linha 1036: fazer lógica para prescrição em razão do decurso do prazo de ato unilateral do empregador
-</td></tr><tr><td>Linha 2301:</td></tr><tr><td>Linha 2305:</td></tr><tr><td>Linha 2333:</td></tr><tr><td>Linha 2337:</td></tr><tr><th>COMENTÁRIOS</th></tr><tr><td>Linha 14: STRUCTS INFOS E PEDIDOS GERAIS</tr></td><tr><td>Linha 198: 				/*loaders {
-					if ([Metainfo:reclamante.dataDeDesligamento].isEmpty()) {
-						[alegacoesGeraisReclamante].options = {"Doença/acidente",
-															   "Função exercida",
-															   "Jornada de trabalho",
-															   "Multas/sucumbência",
-															   "Remuneração",
-															   "Rescisão e verbas rescisórias",
-															   "Outros"}
-					},
-					if ([Metainfo:reclamante.dataDeDesligamento].isNotEmpty()) {
-						if (([Metainfo:reclamante.comoEncerrou] == "Dispensa por justa causa") OR ([Metainfo:reclamante.comoEncerrou] == "Dispensa sem justa causa")) {
-							[alegacoesGeraisReclamante].options = {"Doença/acidente",
-																   "Função exercida",
-																   "Jornada de trabalho",
-																   "Multas/sucumbência",
-																   "Remuneração",
-																   "Rescisão e verbas rescisórias",
-																   "Outros"}
-						} else {
-							[alegacoesGeraisReclamante].options = {"Doença/acidente",
-																   "Função exercida",
-																   "Jornada de trabalho",
-																   "Multas/sucumbência",
-																   "Remuneração",
-																   "Verbas rescisórias",
-																   "Outros"}							
-						}
+            </head> <body> <center><bold><h2>ANÁLISE DO TEMPLATE - FRM_Contestacao Telefonia.lawtex</h2></bold></center><br><br><table id="relatorio"><tr><th>FIXMEs</th></tr><tr><td>Linha 253: Este item foi comentado pois pressupõe-se que a internet já está inseria no plano de telefonia móvel
+</td></tr><tr><td>Linha 333: Este item foi comentado pois pressupõe-se que a internet já está inseria no plano de telefonia móvel
+</td></tr><tr><td>Linha 2169: Melhorar a lógica neste caso, por apenas ter restado 1 item na lista
+</td></tr><tr><td>Linha 2210:: Confirmar se este item diz respeito apenas ao serviço pós-pago
+</td></tr><tr><td>Linha 4150:: Colher com o cliente os textos correspondentes a estes serviços
+</td></tr><tr><td>Linha 4153:: Colher com o cliente os textos correspondentes a estes serviços
+</td></tr><tr><td>Linha 5013:: Revisar a defesa abaixo
+</td></tr><tr><td>Linha 5120:: Usar o email abaixo após validação pelo cliente
+</td></tr><tr><td>Linha 6153:: Usar o email abaixo após validação pelo cliente
+</td></tr><tr><th>PRINTS NÃO FINALIZADOS</th></tr><tr><td>Linha 4150</td></tr><tr><td>Linha 4153</td></tr><tr><th>OPERANDOS DECLARADOS, MAS NÃO OPERADOS</th></tr><tr><td>preliminares</td></tr><tr><td>inversaoOnusProva</td></tr><tr><td>valorDaCausa</td></tr><tr><th>COMENTÁRIOS</th></tr><tr><td>Linha 2: /*
+
+Lista de documentos para subir o frame e o template:
+
+	***** Subir na conta desenvolvimento os seguintes arquivos:
+
+	1. Structs fundamentais
+	2. Grammar
+	3. Estilo
+	4. FRAME
+
+	***** Subir na conta do cliente os seguintes arquivos:
+
+	5. TEMPLATE do cliente
+	6. Logo do cliente
+	7. Footer do cliente
+*/
+</tr></td><tr><td>Linha 21:  STRUCTS E VARIÁVEIS VISÍVEIS </tr></td><tr><td>Linha 46: 											"Empresa Brasileira de Telecomunicacoes S.A. (Embratel)"/*,
+											"BrasilCenter Comunicações Ltda."*/) {
+</tr></td><tr><td>Linha 59: 				}/* elseif ([listaConglomerados] == "Oi") {
+					+[listaPJOi] : List ("Oi S.A.",
+										 "Tele Norte Leste Participações S.A.",
+										 "Dommo Empreendimentos Imobiliários S.A.",
+										 "Brasil Telecom Participações S.A.",
+										 "Telemar Norte Leste S.A.",
+										 "Brasil Telecom S.A.",
+										 "Tele Norte Celular Participações S.A.",
+										 "TNL PCS S.A.",
+										 "Coari Participações S.A.") {
+						name = "Oi"
+						request = "Selecione a empresa do conglomerado da Oi que figura como Parte Ré nesta contestação"
+						atomic = true
 					}
 				}*/
-</tr></td><tr><td>Linha 489: 					/*+[alegacaoDeDoencaAcidente] : List ("Acidente do trabalho", "Doença ocupacional") {
-						name = "Doença/acidente"
-						request = "Indique as alegações da parte reclamante que estão na inicial"
-						atomic = true
-					},
-					if ("Acidente do trabalho" IN [alegacaoDeDoencaAcidente]) {
-						+[descreveAcidente] : Boolean {
-							name = "Descreve acidente"
-							request = "A parte reclamante descreve o acidente?"
-							default = false
-						},
-						+[acidenteNaReclamada] : Boolean {
-							name = "Acidente ocorreu na reclamada?"
-							request = "O acidente descrito pela parte ocorreu no ambiente de trabalho da reclamada?"
-							default = false
-						},
-						+[defesaAcidente] : Text {
-							name = "Defesa da alegação de acidente"
-							request = "Insira, se quiser, uma defesa especifica para o acidente"
-							help = "Não utilize ponto final ao terminar a sua última frase."
+</tr></td><tr><td>Linha 1267: 				 /* Legenda dos IFs do loaders:
+
+					1) if (([FRM_Contestacao_Telefonia:produtos.listaProdutos].isNotEmpty() AND [FRM_Contestacao_Telefonia:produtos.listaProdutos].size() == 2 AND [FRM_Contestacao_Telefonia:produtos.servicosNaMesmaFatura]) OR ([FRM_Contestacao_Telefonia:produtos.listaProdutos].isNotEmpty() AND [FRM_Contestacao_Telefonia:produtos.listaProdutos].size() > 2 AND [FRM_Contestacao_Telefonia:produtos.servicosNaMesmaFatura])) {
+						- Verifica se há pacote combo
+
+					2) if ("Telefonia móvel (pré-pago)" IN [FRM_Contestacao_Telefonia:produtos.listaProdutos]) {
+						- Verifica se há serviço pré-pago
+
+					3) if ("Internet fixa" IN [FRM_Contestacao_Telefonia:produtos.listaProdutos] OR "TV" IN [FRM_Contestacao_Telefonia:produtos.listaProdutos]) {
+						- Verifica se há equipamento que possa ser devolvido
+
+					4) if ("Telefonia fixa" IN [FRM_Contestacao_Telefonia:produtos.listaProdutos] OR "Telefonia móvel (pré-pago)" IN [FRM_Contestacao_Telefonia:produtos.listaProdutos] OR "Telefonia móvel (pós-pago)" IN [FRM_Contestacao_Telefonia:produtos.listaProdutos]) {
+						- Verifica se há linha telefônica que possa ser objeto de pedido de portabilidade
+
+				 */
+</tr></td><tr><td>Linha 2522:  VARIÁVEIS OCULTAS </tr></td><tr><td>Linha 2548:  CONTADORES </tr></td><tr><td>Linha 2567:  FLAGS </tr></td><tr><td>Linha 2674:  NÓS </tr></td><tr><td>Linha 6022: 								/*
+								<qualificacaoParteRe.genero>.default = "Feminino",
+								<qualificacaoParteRe.cnpj> = "33.530.486/0001-29",
+								<qualificacaoParteRe.nome> = "Empresa Brasileira de Telecomunicacoes S.A.",
+								|qualificacaoParteRe.logradouros{0}.tipo|.default = "Sede",
+								|qualificacaoParteRe.logradouros{0}.pais| = "Brasil",
+								|qualificacaoParteRe.logradouros{0}.principal|.default = "Avenida Presidente Vargas",
+								|qualificacaoParteRe.logradouros{0}.numero|.default = "1012",
+								|qualificacaoParteRe.logradouros{0}.complemento|.default = "",
+								|qualificacaoParteRe.logradouros{0}.bairro|.default = "Centro",
+								|qualificacaoParteRe.logradouros{0}.codigoPostal|.default = "20071-910",
+								|qualificacaoParteRe.logradouros{0}.uf|.default = "Rio de Janeiro",
+								|qualificacaoParteRe.logradouros{0}.cidade|.default = "Rio de Janeiro"
+								*/
+</tr></td><tr><td>Linha 6099: 						}, /*elseif (<parteRe.listaConglomerados> == "Oi") {
+							if (<parteRe.listaPJOi> == "Oi") {
+								<qualificacaoParteRe.cnpj> = "00.360.305/0001-04",
+								<qualificacaoParteRe.nome> = "Oi",
+								|qualificacaoParteRe.logradouros{0}.tipo|.default = "Sede",
+								|qualificacaoParteRe.logradouros{0}.pais| = "Brasil",
+								|qualificacaoParteRe.logradouros{0}.principal|.default = "SBS Quadra 4, Lotes 3/4, Ed. Sede",
+								|qualificacaoParteRe.logradouros{0}.numero|.default = "",
+								|qualificacaoParteRe.logradouros{0}.complemento|.default = "21º Andar",
+								|qualificacaoParteRe.logradouros{0}.bairro|.default = "Asa Sul",
+								|qualificacaoParteRe.logradouros{0}.codigoPostal|.default = "70092-900",
+								|qualificacaoParteRe.logradouros{0}.uf|.default = "Distrito Federal",
+								|qualificacaoParteRe.logradouros{0}.cidade|.default = "Brasília"
+							} elseif (<parteRe.listaPJOi> == "Caixa Consórcios S.A Administradora de Consórcios") {
+								<qualificacaoParteRe.cnpj> = "05.349.595/0001-09",
+								<qualificacaoParteRe.nome> = "Caixa Consórcios S.A Administradora de Consórcios",
+								|qualificacaoParteRe.logradouros{0}.tipo|.default = "Sede",
+								|qualificacaoParteRe.logradouros{0}.pais| = "Brasil",
+								|qualificacaoParteRe.logradouros{0}.principal|.default = "SHN Quadra 1, Bloco E, Edifício Caixa Seguradora",
+								|qualificacaoParteRe.logradouros{0}.numero|.default = "",
+								|qualificacaoParteRe.logradouros{0}.complemento|.default = "11º Andar",
+								|qualificacaoParteRe.logradouros{0}.bairro|.default = "Asa Norte",
+								|qualificacaoParteRe.logradouros{0}.codigoPostal|.default = "70701-050",
+								|qualificacaoParteRe.logradouros{0}.uf|.default = "Distrito Federal",
+								|qualificacaoParteRe.logradouros{0}.cidade|.default = "Brasília"
+							}
 						}
-					},*/
-</tr></td><tr><td>Linha 510: if ([alegacaoDeDoencaAcidente].isNotEmpty()) {</tr></td><tr><td>Linha 644: CONTADORES E VARIÁVEIS OCULTAS</tr></td><tr><td>Linha 2071: TÓPICOS FIXOS</tr></td><tr><td>Linha 2550: OR "Verbas rescisórias" IN <alegacoesDeMerito.alegacoesGeraisReclamante></tr></td><tr><th>TÓPICOS ESTÁTICOS (SEM LÓGICA INTERNA)</th></tr><tr><td>topic[TOP_Testando]</td></tr><tr><td>topic[TOP_EsclarecimentoInicialSolvente]</td></tr><tr><td>topic[TOP_EsclarecimentoInicialInsolvente]</td></tr><tr><td>topic[TOP_Ilegitimidade]</td></tr><tr><td>topic[TOP_ResponsabilidadeSubsidiariaGeral]</td></tr><tr><td>topic[TOP_ResponsabilidadeSubsidiariaEmpreitada]</td></tr><tr><td>topic[TOP_ResponsabilidadeSubsidiariaRelacaoComercial]</td></tr><tr><td>topic[TOP_ResponsabilidadeSubsidiariaTransportadora]</td></tr><tr><td>topic[TOP_PrescBiUnilateral]</td></tr><tr><td>topic[TOP_PrecBienal]</td></tr><tr><td>topic[TOP_HorasExtrasInterno]</td></tr><tr><td>topic[TOP_HorasExtrasExterno]</td></tr><tr><td>topic[TOP_IntervaloIntrajornada]</td></tr><tr><td>topic[TOP_IntervaloInterjornada]</td></tr><tr><td>topic[TOP_DomingosFeriados]</td></tr><tr><td>topic[TOP_Sobreaviso]</td></tr><tr><td>topic[TOP_TempoADisposicao]</td></tr><tr><td>topic[TOP_TurnosIninterruptos]</td></tr><tr><td>topic[TOP_384Mulher]</td></tr><tr><td>topic[TOP_Multa467]</td></tr><tr><td>topic[TOP_DanoExistencial]</td></tr><tr><td>topic[TOP_AnotaçõesEmCTPS]</td></tr><tr><td>topic[TOP_SalarioPorFora]</td></tr><tr><td>topic[TOP_Plr]</td></tr><tr><td>topic[TOP_SalarioInNatura]</td></tr><tr><td>topic[TOP_Dsr]</td></tr><tr><td>topic[TOP_ReembolsoDeDespesas]</td></tr><tr><td>topic[TOP_ExpedicaoDeOficios]</td></tr><tr><td>topic[TOP_LitiganciaDeMaFe]</td></tr><tr><td>topic[TOP_Ferias]</td></tr><tr><td>topic[TOP_SalarioSubstituicao]</td></tr><tr><td>topic[TOP_DoencaProfissional]</td></tr><tr><td>topic[TOP_DanoEstetico]</td></tr><tr><td>topic[TOP_DespesasMedicas]</td></tr><tr><td>topic[TOP_PlanoDeSaude]</td></tr><tr><td>topic[TOP_AssedioSexual]</td></tr><tr><td>topic[TOP_Contribuicoes]</td></tr><tr><td>topic[TOP_SalariosAtrasados]</td></tr><tr><td>topic[TOP_ReducaoSalarial]</td></tr><tr><td>topic[TOP_SalarioFamilia]</td></tr><tr><td>topic[TOP_ReintegracaoGestante]</td></tr><tr><td>topic[TOP_ReintegracaoCipeiro]</td></tr><tr><td>topic[TOP_InsalubridadeComPericulosidade]</td></tr><tr><td>topic[TOP_Compensacao]</td></tr><tr><td>topic[TOP_CorrecaoMonetaria]</td></tr><tr><td>topic[TOP_RecolhimentosPrevidenciariosFiscais]</td></tr><tr><td>topic[TOP_JuntadaReclamada]</td></tr><tr><td>topic[TOP_ImpugnacaoDocsJuntados]</td></tr><tr><td>topic[TOP_TutelaAntecipada]</td></tr><tr><td>topic[TOP_AplicacaoMultaDiaria]</td></tr><tr><th>TÓPICOS COM MAIS DE 10 PARÁGRAFOS</th></tr><tr><td>topic[TOP_PreliminaresTrabalhistas]</td></tr><tr><td>topic[TOP_ResponsabilidadeSubsidiariaEmpreitada]</td></tr><tr><td>topic[TOP_MeritoTrabalhista]</td></tr><tr><td>topic[TOP_PensaoMensalVitalicia]</td></tr><tr><td>topic[TOP_LucrosCessantes]</td></tr><tr><td>topic[TOP_AssedioSexual]</td></tr><tr><th>TÓPICOS NÃO UTILIZADOS NO TEMPLATE</th></tr><tr><td>topic[TOP_Testando]</td></tr><tr><th>TUBE GRAMMAR()</th></tr> <tr><td>O tube grammar() não foi usado em nenhum momento neste template.</tr></td><tr><th>STATEMENT OF WORK</th></tr> <tr><td>Neste template não há statement of work.</td></tr><tr><th>README</th></tr> <tr><td>Não foi criado um arquivo README.txt para este template.</td></tr></table></body></html>
+						*/
+</tr></td><tr><td>Linha 6188:  FOOT DECLARATIONS </tr></td><tr><td>Linha 6800:  Header </tr></td><tr><td>Linha 6802:  Body </tr></td><tr><td>Linha 7110:  Foot </tr></td><tr><th>TÓPICOS ESTÁTICOS (SEM LÓGICA INTERNA)</th></tr><tr><td>topic[TOP_PreliminarInepciaCausaPedirPedido]</td></tr><tr><td>topic[TOP_IlegitimidadePassivaAparelho]</td></tr><tr><td>topic[TOP_PosPagoServicoInternetRegular]</td></tr><tr><td>topic[TOP_SinalTelevisao]</td></tr><tr><td>topic[TOP_Fraude]</td></tr><tr><td>topic[TOP_DevolucaoDeEquipamentoFrustrada]</td></tr><tr><td>topic[TOP_CancelamentoCreditos]</td></tr><tr><td>topic[TOP_TranscricaoCancelamento]</td></tr><tr><td>topic[TOP_ImpossibilidadeReducaoOuLimitacaoValorParcelas]</td></tr><tr><td>topic[TOP_ImpedimentoCobrancaExtrajudicial]</td></tr><tr><td>topic[TOP_LucrosCessantesPerdasDanos]</td></tr><tr><td>topic[TOP_ImpossibilidadeDepositoValorIncontroverso]</td></tr><tr><td>topic[TOP_CancelamentoPorUsoLinhaPFparaFinsCorporativos]</td></tr><tr><td>topic[TOP_ImposicaoContratacaoPacoteCombo]</td></tr><tr><th>TÓPICOS COM MAIS DE 10 PARÁGRAFOS</th></tr><tr><td>topic[TOP_PreliminaresCT]</td></tr><tr><td>topic[TOP_MeritoCT]</td></tr><tr><td>topic[TOP_InformacoesContratacao]</td></tr><tr><td>topic[TOP_QuestoesRelativasServicoPrePago]</td></tr><tr><td>topic[TOP_OcorrenciaDefeitosTecnicos]</td></tr><tr><td>topic[TOP_SinalTelefone]</td></tr><tr><td>topic[TOP_ContratoNaoCelebradoInexistenciaRelacaoJuridica]</td></tr><tr><td>topic[TOP_HaNegocioJuridico]</td></tr><tr><td>topic[TOP_DebitosCobradosMasNaoContratados]</td></tr><tr><td>topic[TOP_ServicosCobradosPelaTIM]</td></tr><tr><td>topic[TOP_MBVJ_LEGALIDADE_ALTERACAO_PLANO]</td></tr><tr><td>topic[TOP_DivergenciaEntreValorCobradoValorDevido]</td></tr><tr><td>topic[TOP_ImpossibilidadeDePortabilidade]</td></tr><tr><td>topic[TOP_Cancelamento]</td></tr><tr><td>topic[TOP_DemoraNoCancelamento]</td></tr><tr><td>topic[TOP_InscricaoEmCadastroInadimplentes]</td></tr><tr><td>topic[TOP_ImpossibilidadeRemocaoCadastroInadimplentes]</td></tr><tr><td>topic[TOP_DanosMateriais]</td></tr><tr><td>topic[TOP_DanosMorais]</td></tr><tr><td>topic[TOP_Calistenia]</td></tr><tr><td>topic[TOP_Fidelizacao]</td></tr><tr><th>STATEMENT OF WORK</th></tr> <tr><td>Neste template não há statement of work.</td></tr></table></body></html>

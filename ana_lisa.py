@@ -21,7 +21,7 @@ def checkNameSize(fileName):
     count = 1
     while line:
         if line.find(name) != -1:
-            nameUnderAnalysis = line[line.find(name)+7:len(line)-1]
+            nameUnderAnalysis = line[line.find(name)+8:line.find('\"', 8)]
             if (len(nameUnderAnalysis) > 100):
                 redFlag = ("Linha " + str(count) + ": " + nameUnderAnalysis)
                 list_Names.append(redFlag)
@@ -39,7 +39,9 @@ def checkRequestSize(fileName):
     count = 1
     while line:
         if line.find(request) != -1:
-            requestUnderAnalysis = line[line.find(request)+10:len(line)-1]
+            requestUnderAnalysis = line[line.find(request)+11:line.find('\"', 12)]
+            print('debug')
+            print(len(requestUnderAnalysis))
             if (len(requestUnderAnalysis) > 100):
                 redFlag = "Linha " + str(count) + ": " + requestUnderAnalysis
                 list_Requests.append(redFlag)
@@ -95,12 +97,9 @@ def collectAllTopics(fileName):
                 line = targetFile.readline()
                 while count_opening > count_closing:
                     topic = topic + line
-                    if line.find('{') != -1 and line.find('}') == -1:
+                    if line.find('{') != -1:
                         count_opening += 1
-                    elif line.find('{') == -1 and line.find('}') != -1:
-                        count_closing += 1
-                    elif line.find('{') != -1 and line.find('}') != -1:
-                        count_opening += 1
+                    if line.find('}') != -1:
                         count_closing += 1
                     line = targetFile.readline()
                 t.setCompleteTopic(topic)
