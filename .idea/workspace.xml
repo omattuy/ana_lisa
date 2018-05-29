@@ -19,23 +19,17 @@
       <file leaf-file-name="ana_lisa.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ana_lisa.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="283">
-              <caret line="133" selection-start-line="133" selection-end-line="133" />
+            <state relative-caret-position="24">
+              <caret line="472" column="44" lean-forward="true" selection-start-line="472" selection-start-column="44" selection-end-line="472" selection-end-column="44" />
               <folding>
                 <element signature="e#1001#1029#0" expanded="true" />
-                <element signature="e#4931#5376#0" />
-                <element signature="e#5485#6752#0" />
-                <element signature="e#6863#7048#0" />
+                <element signature="e#1419#1950#0" />
+                <element signature="e#2065#2625#0" />
+                <element signature="e#2703#3180#0" />
+                <element signature="e#5515#5700#0" />
+                <element signature="e#5775#6247#0" />
+                <element signature="e#6351#6795#0" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="topics.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/topics.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
             </state>
           </provider>
         </entry>
@@ -44,36 +38,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>checkStaticTopics(fileName</find>
-      <find>fileName</find>
-      <find>checkStaticTopics(</find>
-      <find>seek</find>
-      <find>targetFile</find>
-      <find>.seek(0</find>
-      <find>targetFile.seek(</find>
-      <find>targetFile.seek(0</find>
-      <find>getFile.seek(</find>
-      <find>staticTopics(</find>
-      <find>21/10/2016</find>
-      <find>/*SUJEITOS*/</find>
-      <find>list_all_topics</find>
-      <find>checkStaticTopics</find>
-      <find>staticTopics</find>
-      <find>collectionAllTopics</find>
-      <find>static</find>
-      <find>topic = line</find>
-      <find>t = Topic()</find>
-      <find>not in</find>
-      <find>collectAllTopics</find>
-      <find>c</find>
-      <find>list_static_topics</find>
-      <find>OPERANDOS DECLARADOS, MAS NÃO OPERADOS</find>
-      <find>getLineNumberBegTopic</find>
-      <find>setLineNumberBegTopic</find>
-      <find>count_beg_topic</find>
-      <find>count_total_number_topics</find>
-      <find>collectStaticTopics</find>
       <find>checkTotalNumberTopics</find>
+      <find>checkExistenceUnfinishedPrints</find>
+      <find>contém</find>
+      <find>checkExistenceReadmeFile</find>
+      <find>análise</find>
+      <find>NODES_</find>
+      <find>TEMP_</find>
+      <find>static</find>
+      <find>collectStaticTopics</find>
+      <find>list_static_topics</find>
+      <find>list_topics_large_number_paragraphs</find>
+      <find>collectOnlyStaticTopics</find>
+      <find>PreliminaresTrabalhistas</find>
+      <find>MeritoTrabalhista</find>
+      <find>lineNumberEndTopic</find>
+      <find>getNameTopic</find>
+      <find>getCompleteTopic</find>
+      <find>setLineNumberEndTopic</find>
+      <find>getLineNumberEndTopic</find>
+      <find>checkNamesAllTopics</find>
+      <find>makeListAllTopics</find>
+      <find>collectAllTopics</find>
+      <find>collectTopicsLargeNumberParagraphs</find>
+      <find>collectTopicsNotBeingUsed</find>
+      <find>print</find>
+      <find>print(</find>
+      <find>notbeing</find>
+      <find>debug</find>
+      <find>+=</find>
+      <find>list_topics_not_being_used</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -86,6 +80,8 @@
         <option value="$PROJECT_DIR$/teste.py" />
         <option value="$PROJECT_DIR$/comments.py" />
         <option value="$PROJECT_DIR$/Topic.py" />
+        <option value="$PROJECT_DIR$/lista_expressoes_incorretas" />
+        <option value="$PROJECT_DIR$/lista_expressoes_a_evitar" />
         <option value="$PROJECT_DIR$/topics.py" />
         <option value="$PROJECT_DIR$/ana_lisa.py" />
       </list>
@@ -133,6 +129,24 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.ana_lisa">
+    <configuration name="Unnamed" type="PythonConfigurationType" factoryName="Python">
+      <module name="ana_lisa" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Otavio\Anaconda3\python.exe" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
     <configuration name="ana_lisa" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="ana_lisa" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -170,6 +184,7 @@
       <option name="MODULE_MODE" value="false" />
     </configuration>
     <list>
+      <item itemvalue="Python.Unnamed" />
       <item itemvalue="Python.ana_lisa" />
       <item itemvalue="Python.teste_2" />
     </list>
@@ -195,17 +210,18 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.11859444" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.17569546" />
       <window_info anchor="bottom" id="TODO" order="10" />
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.68151814" />
       <window_info anchor="bottom" id="Version Control" order="3" />
       <window_info anchor="bottom" id="Python Console" order="0" weight="0.73432344" />
-      <window_info anchor="bottom" id="Run" order="6" weight="0.4339934" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="1" />
+      <window_info anchor="bottom" id="Debug" order="7" weight="0.5148515" />
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="7" weight="0.50825083" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -220,19 +236,171 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="5" />
+      <option name="time" value="25" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/ana_lisa.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="792">
+          <caret line="34" column="54" lean-forward="true" selection-start-line="24" selection-end-line="34" selection-end-column="54" />
+          <folding>
+            <element signature="e#1001#1029#0" expanded="true" />
+            <element signature="e#1419#1950#0" />
+            <element signature="e#2065#2625#0" />
+            <element signature="e#2703#3180#0" />
+            <element signature="e#5515#5700#0" />
+            <element signature="e#5775#6247#0" />
+            <element signature="e#6351#6795#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ana_lisa.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="10944">
+          <caret line="456" column="14" selection-start-line="456" selection-start-column="14" selection-end-line="456" selection-end-column="14" />
+          <folding>
+            <element signature="e#1001#1029#0" expanded="true" />
+            <element signature="e#1419#1950#0" />
+            <element signature="e#2065#2625#0" />
+            <element signature="e#2703#3180#0" />
+            <element signature="e#5515#5700#0" />
+            <element signature="e#5775#6247#0" />
+            <element signature="e#6351#6795#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ana_lisa.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="10944">
+          <caret line="456" column="14" selection-start-line="456" selection-start-column="14" selection-end-line="456" selection-end-column="14" />
+          <folding>
+            <element signature="e#1001#1029#0" expanded="true" />
+            <element signature="e#1419#1950#0" />
+            <element signature="e#2065#2625#0" />
+            <element signature="e#2703#3180#0" />
+            <element signature="e#5515#5700#0" />
+            <element signature="e#5775#6247#0" />
+            <element signature="e#6351#6795#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lista_expressoes_a_evitar">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ana_lisa.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="10944">
+          <caret line="456" column="14" lean-forward="true" selection-start-line="456" selection-start-column="14" selection-end-line="456" selection-end-column="14" />
+          <folding>
+            <element signature="e#1001#1029#0" expanded="true" />
+            <element signature="e#1419#1950#0" />
+            <element signature="e#2065#2625#0" />
+            <element signature="e#2703#3180#0" />
+            <element signature="e#5515#5700#0" />
+            <element signature="e#5775#6247#0" />
+            <element signature="e#6351#6795#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lista_expressoes_a_evitar">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="15" column="8" lean-forward="true" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ana_lisa.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="19" column="24" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+          <folding>
+            <element signature="e#1001#1029#0" expanded="true" />
+            <element signature="e#1419#1950#0" />
+            <element signature="e#2065#2625#0" />
+            <element signature="e#2703#3180#0" />
+            <element signature="e#5515#5700#0" />
+            <element signature="e#5775#6247#0" />
+            <element signature="e#6351#6795#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ana_lisa.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8016">
+          <caret line="334" column="27" selection-start-line="334" selection-start-column="22" selection-end-line="334" selection-end-column="27" />
+          <folding>
+            <element signature="e#1001#1029#0" expanded="true" />
+            <element signature="e#1419#1950#0" />
+            <element signature="e#2065#2625#0" />
+            <element signature="e#2703#3180#0" />
+            <element signature="e#5515#5700#0" />
+            <element signature="e#5775#6247#0" />
+            <element signature="e#6351#6795#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ana_lisa.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7608">
+          <caret line="317" column="21" lean-forward="true" selection-start-line="317" selection-start-column="21" selection-end-line="317" selection-end-column="21" />
+          <folding>
+            <element signature="e#1001#1029#0" expanded="true" />
+            <element signature="e#1419#1950#0" />
+            <element signature="e#2065#2625#0" />
+            <element signature="e#2703#3180#0" />
+            <element signature="e#5515#5700#0" />
+            <element signature="e#5775#6247#0" />
+            <element signature="e#6351#6795#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ana_lisa.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3192">
+          <caret line="133" selection-start-line="133" selection-end-line="133" />
+          <folding>
+            <element signature="e#1001#1029#0" expanded="true" />
+            <element signature="e#1419#1950#0" />
+            <element signature="e#2065#2625#0" />
+            <element signature="e#2703#3180#0" />
+            <element signature="e#5515#5700#0" />
+            <element signature="e#5775#6247#0" />
+            <element signature="e#6351#6795#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/topics.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ana_lisa.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="9768">
           <caret line="407" lean-forward="true" selection-start-line="407" selection-end-line="407" />
           <folding>
             <element signature="e#1001#1029#0" expanded="true" />
-            <element signature="e#4931#5376#0" />
-            <element signature="e#5485#6752#0" />
-            <element signature="e#6863#7048#0" />
+            <element signature="e#1419#1950#0" />
+            <element signature="e#2065#2625#0" />
+            <element signature="e#2703#3180#0" />
+            <element signature="e#5515#5700#0" />
+            <element signature="e#5775#6247#0" />
+            <element signature="e#6351#6795#0" />
           </folding>
         </state>
       </provider>
@@ -250,9 +418,12 @@
           <caret line="104" column="22" lean-forward="true" selection-start-line="104" selection-start-column="22" selection-end-line="104" selection-end-column="22" />
           <folding>
             <element signature="e#1001#1029#0" expanded="true" />
-            <element signature="e#4931#5376#0" />
-            <element signature="e#5485#6752#0" />
-            <element signature="e#6863#7048#0" />
+            <element signature="e#1419#1950#0" />
+            <element signature="e#2065#2625#0" />
+            <element signature="e#2703#3180#0" />
+            <element signature="e#5515#5700#0" />
+            <element signature="e#5775#6247#0" />
+            <element signature="e#6351#6795#0" />
           </folding>
         </state>
       </provider>
@@ -334,22 +505,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Desktop/ArquivosLawtex/TEMP_Proposta_Honorarios_BRA_ENG.lawtex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="19" lean-forward="true" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/Desktop/ArquivosLawtex/TEMP_Proposta_Honorarios_BRA_ENG.lawtex" />
     <entry file="file://$PROJECT_DIR$/teste_2.py" />
     <entry file="file://$PROJECT_DIR$/teste.py" />
-    <entry file="file://$PROJECT_DIR$/lista_expressoes_a_evitar">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="533">
-          <caret line="42" column="8" lean-forward="true" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Relatorio.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
@@ -364,22 +522,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lista_expressoes_incorretas">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="8" selection-start-column="8" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lista_expressoes_a_evitar">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="42" column="8" lean-forward="true" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/topics.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+        <state relative-caret-position="168">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ana_lisa.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="133" selection-start-line="133" selection-end-line="133" />
+        <state relative-caret-position="24">
+          <caret line="472" column="44" lean-forward="true" selection-start-line="472" selection-start-column="44" selection-end-line="472" selection-end-column="44" />
           <folding>
             <element signature="e#1001#1029#0" expanded="true" />
-            <element signature="e#4931#5376#0" />
-            <element signature="e#5485#6752#0" />
-            <element signature="e#6863#7048#0" />
+            <element signature="e#1419#1950#0" />
+            <element signature="e#2065#2625#0" />
+            <element signature="e#2703#3180#0" />
+            <element signature="e#5515#5700#0" />
+            <element signature="e#5775#6247#0" />
+            <element signature="e#6351#6795#0" />
           </folding>
         </state>
       </provider>

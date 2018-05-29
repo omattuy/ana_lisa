@@ -83,65 +83,87 @@ def checkExistenceFixmes(fileName):
     targetFile.close()
     return list_Fixmes
 
-# Coleta de tópicos estáticos
-def collectStaticTopics(fileName):
-    # Identifica o nome de todos os tópicos no template
-    def checkNamesAllTopics(fileName):
-        targetFile = open(fileName, "r", encoding="utf-8")
+# Identifica o nome de todos os tópicos no template
+def checkNamesAllTopics(fileName):
+    targetFile = open(fileName, "r", encoding="utf-8")
+    line = targetFile.readline()
+    name_all_topics = []
+    while line:
+        if line.find('topic') != -1 and line.find('{') != -1:
+            t = Topic()
+            t.setNameTopic(line[line.find('topic'):line.find('{')+1])
+            name_all_topics.append(t)
         line = targetFile.readline()
-        name_all_topics = []
-        while line:
-            if line.find('topic') != -1 and line.find('{') != -1:
-                t = Topic()
-                t.setNameTopic(line[line.find('topic'):line.find('{')+1])
-                name_all_topics.append(t)
-            line = targetFile.readline()
-        targetFile.close()
-        return name_all_topics
+    targetFile.close()
+    return name_all_topics
 
-    # Coleta todos os tópicos no template
-    def collectAllTopics(fileName, name_all_topics):
-        targetFile = open(fileName, "r", encoding="utf-8")
-        list_topics = []
-        for name in name_all_topics:
-            line = targetFile.readline()
-            while line:
-                if line.find(name.getNameTopic()) != -1:
-                    t = Topic()
-                    topic = line
-                    count_opening = 1
-                    count_closing = 0
-                    line = targetFile.readline()
-                    while count_opening > count_closing:
-                        topic = topic + line
-                        if line.find('{') != -1 and line.find('}') == -1:
-                            count_opening += 1
-                        elif line.find('{') == -1 and line.find('}') != -1:
-                            count_closing += 1
-                        elif line.find('{') != -1 and line.find('}') != -1:
-                            count_opening += 1
-                            count_closing += 1
-                        line = targetFile.readline()
-                    t.setCompleteTopic(topic)
-                    t.setNameTopic(name.getNameTopic()[:name.getNameTopic().find(' ')])
-                    list_topics.append(t)
-                line = targetFile.readline()
-            targetFile.seek(0)
-        targetFile.close()
-        return list_topics
-
-    # Coleta apenas os tópicos estáticos
-    def collectOnlyStaticTopics(list_all_topics):
-        list_static_topics = []
-        for t in list_all_topics:
-            if 'if' not in t.getCompleteTopic():
-                list_static_topics.append(t)
-        return list_static_topics
-
+# Coleta todos os tópicos no template
+def collectAllTopics(fileName):
     name_all_topics = checkNamesAllTopics(fileName)
-    list_all_topics = collectAllTopics(fileName, name_all_topics)
-    list_static_topics = collectOnlyStaticTopics(list_all_topics)
+    targetFile = open(fileName, "r", encoding="utf-8")
+    list_all_topics = []
+    for name in name_all_topics:
+        line = targetFile.readline()
+        while line:
+            if line.find(name.getNameTopic()) != -1:
+                t = Topic()
+                topic = line
+                count_opening = 1
+                count_closing = 0
+                line = targetFile.readline()
+                while count_opening > count_closing:
+                    topic = topic + line
+                    if line.find('{') != -1 and line.find('}') == -1:
+                        count_opening += 1
+                    elif line.find('{') == -1 and line.find('}') != -1:
+                        count_closing += 1
+                    elif line.find('{') != -1 and line.find('}') != -1:
+                        count_opening += 1
+                        count_closing += 1
+                    line = targetFile.readline()
+                t.setCompleteTopic(topic)
+                t.setNameTopic(name.getNameTopic()[:name.getNameTopic().find(' ')])
+                list_all_topics.append(t)
+            line = targetFile.readline()
+        targetFile.seek(0)
+    targetFile.close()
+    return list_all_topics
+
+# Coleta apenas os tópicos estáticos
+def collectOnlyStaticTopics(fileName):
+    list_all_topics = collectAllTopics(fileName)
+    list_static_topics = []
+    for t in list_all_topics:
+        if 'if' not in t.getCompleteTopic():
+            list_static_topics.append(t)
     return list_static_topics
+
+# Coleta os tópicos com grande quantidade de parágrafos
+def collectTopicsLargeNumberParagraphs(fileName):
+    list_all_topics = collectAllTopics(fileName)
+    list_topics_large_number_paragraphs = []
+    for t in list_all_topics:
+        if t.getCompleteTopic().count('\p') > 10:
+            list_topics_large_number_paragraphs.append(t)
+    return list_topics_large_number_paragraphs
+
+# Coleta todos os tópicos não operados
+def collectTopicsNotBeingUsed(fileName):
+    name_all_topics = checkNamesAllTopics(fileName)
+    list_topics_not_being_used = []
+    targetFile = open(fileName, "r", encoding = "utf-8")
+    for t in name_all_topics:
+        count = 0
+        line = targetFile.readline()
+        while line:
+            if line.find(t.getNameTopic()[:t.getNameTopic().find(']')+1]) != -1:
+                count += 1
+            line = targetFile.readline()
+        if count == 1:
+            list_topics_not_being_used.append(t)
+        targetFile.seek(0)
+    targetFile.close()
+    return list_topics_not_being_used
 
 # Identifica a existência de TODO
 def checkExistenceTodos(fileName):
@@ -159,6 +181,22 @@ def checkExistenceTodos(fileName):
         count = count + 1
     targetFile.close()
     return list_Todos
+
+# Identifica a existência de prints não finalizados
+def checkExistenceUnfinishedPrints(fileName):
+    targetFile = open(fileName, "r", encoding="utf-8")
+    list_unfinished_prints = []
+    unfinished_prints = "print \"\""
+    line = targetFile.readline()
+    count = 1
+    while line:
+        if line.find(unfinished_prints) != -1:
+            redFlag = "Linha " + str(count)
+            list_unfinished_prints.append(redFlag)
+        line = targetFile.readline()
+        count = count + 1
+    targetFile.close()
+    return list_unfinished_prints
 
 # Identifica a existência do tube Grammar()
 def checkExistenceGrammarTube(fileName):
@@ -320,6 +358,10 @@ def checkExistenceReadmeFile(fileName):
         filePath = fileName[:fileName.find("TEMP_")]
     elif fileName.find("FRM_") != -1:
         filePath = fileName[:fileName.find("FRM_")]
+    elif fileName.find("NODES_") != -1:
+        filePath = fileName[:fileName.find("NODES_")]
+    elif fileName.find("STRC_") != -1:
+        filePath = fileName[:fileName.find("STRC_")]
     import os.path
     my_file = filePath + "README.txt"
     if os.path.isfile(my_file) == False:
@@ -360,7 +402,12 @@ def createReport():
         shortFileName = fileName[fileName.find("TEMP_"):len(fileName)]
     elif fileName.find("FRM_") != -1:
         shortFileName = fileName[fileName.find("FRM_"):len(fileName)]
+    elif fileName.find("NODES_") != -1:
+        shortFileName = fileName[fileName.find("NODES_"):len(fileName)]
+    elif fileName.find("STRC_") != -1:
+        shortFileName = fileName[fileName.find("STRC_"):len(fileName)]
     message = message + shortFileName + """</h2></bold></center>"""
+
     message = message + """<br><br><table id="relatorio">"""
 
     list_Names = checkNameSize(fileName)
@@ -387,6 +434,12 @@ def createReport():
         for i in list_Todos:
             message = message + "<tr><td>" + i + "</td></tr>"
 
+    list_unfinished_prints = checkExistenceUnfinishedPrints(fileName)
+    if len(list_unfinished_prints) > 0:
+        message = message + "<tr><th>PRINTS NÃO FINALIZADOS</th></tr>"
+        for i in list_unfinished_prints:
+            message = message + "<tr><td>" + i + "</td></tr>"
+
     list_UnusedVariables = collectAllVariablesAndCheckExistenceUnusedVariables(fileName)
     list_UnusedStructs = collectAllVariablesAndCheckExistenceUnusedStructs(fileName)
     list_all_unused_variables_structs = list_UnusedVariables + list_UnusedStructs
@@ -398,20 +451,30 @@ def createReport():
 
     list_comments = checkExistenceComment(fileName)
     if len(list_comments) > 0:
-        message = message + "<tr><th>COMENTÁRIOS</th></tr> <tr><td>Este template contém " + str(len(list_comments)) + " trechos de código comentado."
+        message = message + "<tr><th>COMENTÁRIOS</th></tr>"
         for c in list_comments:
-            message = message + '<br><br>==================================<br><br>'
-            message = message + 'Linha ' + str(c.getLineNumberBegComment()) + ': <br>'+ c.getCompleteComment()
-        message = message + "<tr><td>"
+            message = message + "<tr><td>Linha " + str(c.getLineNumberBegComment()) + ": " + c.getCompleteComment() + "</tr></td>"
 
-    list_static_topics = collectStaticTopics(fileName)
+    list_static_topics = collectOnlyStaticTopics(fileName)
     if len(list_static_topics) > 0:
         message = message + "<tr><th>TÓPICOS ESTÁTICOS (SEM LÓGICA INTERNA)</th></tr>"
         for i in list_static_topics:
             message = message + "<tr><td>" + i.getNameTopic() + "</td></tr>"
 
+    list_topics_large_number_paragraphs = collectTopicsLargeNumberParagraphs(fileName)
+    if len(list_topics_large_number_paragraphs) > 0:
+        message = message + "<tr><th>TÓPICOS COM MAIS DE 10 PARÁGRAFOS</th></tr>"
+        for i in list_topics_large_number_paragraphs:
+            message = message + "<tr><td>" + i.getNameTopic() + "</td></tr>"
+
+    list_topics_not_being_used = collectTopicsNotBeingUsed(fileName)
+    if len(list_topics_not_being_used) > 0:
+        message = message + "<tr><th>TÓPICOS NÃO UTILIZADOS NO TEMPLATE</th></tr>"
+        for i in list_topics_not_being_used:
+            message = message + "<tr><td>" + i.getNameTopic()[:i.getNameTopic().find(']')+1] + "</td></tr>"
+
     if checkExistenceGrammarTube(fileName) == False:
-        message = message + "<tr><th>GRAMMAR</th></tr> <tr><td>O tube grammar() não foi usado em nenhum momento neste template.</tr></td>"
+        message = message + "<tr><th>TUBE GRAMMAR()</th></tr> <tr><td>O tube grammar() não foi usado em nenhum momento neste template.</tr></td>"
 
     if checkExistenceStatements(fileName) == False:
         message = message + "<tr><th>STATEMENT OF WORK</th></tr> <tr><td>Neste template não há statement of work.</td></tr>"
