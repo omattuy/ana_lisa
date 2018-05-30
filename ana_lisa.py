@@ -40,8 +40,6 @@ def checkRequestSize(fileName):
     while line:
         if line.find(request) != -1:
             requestUnderAnalysis = line[line.find(request)+11:line.find('\"', 12)]
-            print('debug')
-            print(len(requestUnderAnalysis))
             if (len(requestUnderAnalysis) > 100):
                 redFlag = "Linha " + str(count) + ": " + requestUnderAnalysis
                 list_Requests.append(redFlag)
