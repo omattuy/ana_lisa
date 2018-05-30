@@ -205,7 +205,6 @@ def checkExistenceComment(fileName):
             c.setLineNumberBegComment(lineNumber)
             c.setCompleteComment(line[line.find(idx_beg_comment)+2:line.find(idx_end_comment)])
             list_comments.append(c)
-            lineNumber = lineNumber + 1
         elif line.find(idx_beg_comment) != -1 and line.find(idx_end_comment) == -1:
             c = Comment()
             c.setLineNumberBegComment(lineNumber)
@@ -216,10 +215,9 @@ def checkExistenceComment(fileName):
             comment = comment + line # Última linha do comentário
             c.setCompleteComment(comment)
             list_comments.append(c)
-        else:
-            lineNumber = lineNumber + 1
         line = targetFile.readline()
         comment = ""
+        lineNumber = lineNumber + 1
     targetFile.close()
     return list_comments
 
