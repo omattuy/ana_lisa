@@ -1,16 +1,16 @@
+import webbrowser
 from comments import Comment
 from topics import Topic
-
-fileName = ""
+import tkinter as tk
+from tkinter import filedialog
+import os.path
 
 # Abre possibilidade para que usuário selecione um arquivo
 def selectFile():
-    global fileName
-    import tkinter as tk
-    from tkinter import filedialog
     root = tk.Tk()
     root.withdraw()
     fileName = filedialog.askopenfilename()
+    return fileName
 
 # Verifica se há names com número de caracteres que sejam maiores que 100
 def checkNameSize(fileName):
@@ -21,7 +21,7 @@ def checkNameSize(fileName):
     count = 1
     while line:
         if line.find(name) != -1:
-            nameUnderAnalysis = line[line.find(name)+8:line.find('\"', 8)]
+            nameUnderAnalysis = line[line.find('\"')+1:len(line)-2]
             if (len(nameUnderAnalysis) > 100):
                 redFlag = ("Linha " + str(count) + ": " + nameUnderAnalysis)
                 list_Names.append(redFlag)
@@ -39,7 +39,7 @@ def checkRequestSize(fileName):
     count = 1
     while line:
         if line.find(request) != -1:
-            requestUnderAnalysis = line[line.find(request)+11:line.find('\"', 12)]
+            requestUnderAnalysis = line[line.find('\"')+1:len(line)-2]
             if (len(requestUnderAnalysis) > 100):
                 redFlag = "Linha " + str(count) + ": " + requestUnderAnalysis
                 list_Requests.append(redFlag)
@@ -113,8 +113,9 @@ def collectOnlyStaticTopics(fileName):
     list_all_topics = collectAllTopics(fileName)
     list_static_topics = []
     for t in list_all_topics:
-        if 'if' not in t.getCompleteTopic():
-            list_static_topics.append(t)
+        if 'use topic[' not in t.getCompleteTopic() and 'use *topic[' not in t.getCompleteTopic():
+            if 'if' not in t.getCompleteTopic():
+                list_static_topics.append(t)
     return list_static_topics
 
 # Coleta os tópicos com grande quantidade de parágrafos
@@ -122,8 +123,9 @@ def collectTopicsLargeNumberParagraphs(fileName):
     list_all_topics = collectAllTopics(fileName)
     list_topics_large_number_paragraphs = []
     for t in list_all_topics:
-        if t.getCompleteTopic().count('\p') > 10:
-            list_topics_large_number_paragraphs.append(t)
+        if 'use topic[' not in t.getCompleteTopic() and 'use *topic[' not in t.getCompleteTopic():
+            if t.getCompleteTopic().count('\p') > 10:
+                list_topics_large_number_paragraphs.append(t)
     return list_topics_large_number_paragraphs
 
 # Coleta todos os tópicos não operados
@@ -339,16 +341,13 @@ def checkExistenceReadmeFile(fileName):
         filePath = fileName[:fileName.find("NODES_")]
     elif fileName.find("STRC_") != -1:
         filePath = fileName[:fileName.find("STRC_")]
-    import os.path
     my_file = filePath + "README.txt"
     if os.path.isfile(my_file) == False:
         readmeFileDoesNotExists = True
     return readmeFileDoesNotExists
 
 # Criação de arquivo HTML com relatório das informações relevantes
-def createReport():
-    import webbrowser
-    global fileName
+def createReport(fileName):
     f = open('Relatorio.html','w')
 
     message = """
@@ -464,5 +463,5 @@ def createReport():
     f.close()
     webbrowser.open_new_tab('Relatorio.html')
 
-selectFile()
-createReport()
+fileName = selectFile()
+createReport(fileName)
