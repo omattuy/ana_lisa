@@ -1,6 +1,7 @@
 import webbrowser
 from comments import Comment
 from topics import Topic
+from lists import List
 import tkinter as tk
 from tkinter import filedialog
 import os.path
@@ -346,6 +347,74 @@ def checkExistenceReadmeFile(fileName):
         readmeFileDoesNotExists = True
     return readmeFileDoesNotExists
 
+# Verifica a existência de espaços em branco ao final de cada linha
+def checkExistenceEmptySpaceCharacter(fileName):
+    targetFile = open(fileName, "r", encoding="utf-8")
+    list_empty_space_characters = []
+    line = targetFile.readline()
+    count = 1
+    while line:
+        if line[len(line) - 2] == ' ':
+            redFlag = "Linha " + str(count)
+            list_empty_space_characters.append(redFlag)
+        line = targetFile.readline()
+        count = count + 1
+    targetFile.close()
+    return list_empty_space_characters
+
+# Coleta todos os fields de listas 
+def collectAllLists(fileName):
+    targetFile = open(fileName, "r", encoding="utf-8")
+    listSyntax = ': List'
+    list_lists = []
+    line = targetFile.readline()
+    while line:
+        if line.find(listSyntax) != -1:
+            l = List()
+            l.setListAlias(line[line.find('['):line.find(']') + 1])
+            while line.find('atomic') == -1:
+                line = targetFile.readline()
+            if 'true' in line:
+                l.setTypeList(True)
+            elif 'false' in line:
+                l.setTypeList(False)
+            list_lists.append(l)
+        line = targetFile.readline()
+    targetFile.close()
+    return list_lists
+
+# Identifica a existência de listas com sintaxe incorreta
+def checkListsWithIncorrectSyntax(fileName):
+    list_lists = collectAllLists(fileName)
+    targetFile = open(fileName, "r", encoding="utf-8")
+    lists_with_incorrect_syntax = []
+    line = targetFile.readline()
+    for l in list_lists:
+        line = targetFile.readline()
+        lineNumber = 1
+        list_line_numbers = []
+        while line:
+            if line.find('.' + l.getListAlias()[1:len(l.getListAlias())-1]) != -1:
+                if l.getTypeList() == True and line.find('IN') != -1:
+                    if l not in lists_with_incorrect_syntax:
+                        list_line_numbers.append(lineNumber)
+                        l.setListLineNumber(list_line_numbers)
+                        lists_with_incorrect_syntax.append(l)
+                    else:
+                        l.getListLineNumber().append(lineNumber)
+                elif l.getTypeList() == False and line.find('IN') == -1:
+                    if l not in lists_with_incorrect_syntax:
+                        list_line_numbers.append(lineNumber)
+                        l.setListLineNumber(list_line_numbers)
+                        lists_with_incorrect_syntax.append(l)
+                    else:
+                        l.getListLineNumber().append(lineNumber)
+            line = targetFile.readline()
+            lineNumber = lineNumber + 1
+        targetFile.seek(0)
+    targetFile.close()
+    return lists_with_incorrect_syntax
+
 # Criação de arquivo HTML com relatório das informações relevantes
 def createReport(fileName):
     f = open('Relatorio.html','w')
@@ -448,6 +517,27 @@ def createReport(fileName):
         message = message + "<tr><th>TÓPICOS NÃO UTILIZADOS NO TEMPLATE</th></tr>"
         for i in list_topics_not_being_used:
             message = message + "<tr><td>" + i.getNameTopic()[:i.getNameTopic().find(']')+1] + "</td></tr>"
+
+    list_empty_space_characters = checkExistenceEmptySpaceCharacter(fileName)
+    if len(list_empty_space_characters) > 0:
+        message = message + "<tr><th>LINHAS COM ESPAÇO ESPAÇO VAZIO</th></tr>"
+        for i in list_empty_space_characters:
+            message = message + "<tr><td>" + i + "</td></tr>"
+
+    lists_with_incorrect_syntax = checkListsWithIncorrectSyntax(fileName)
+    if len(lists_with_incorrect_syntax) > 0:
+        message = message + "<tr><th>LISTAS COM SINTAXE INCORRETA</th></tr>"
+        for i in lists_with_incorrect_syntax:
+            message = message + "<tr><td>" + i.getListAlias() + " (lista "
+            if i.getTypeList() == True:
+                message = message + " atômica) -> uso de sintaxe de lista não atômica identificado na linha "
+                for lineNumber in i.getListLineNumber():
+                    message = message + " / " + str(lineNumber)
+            elif i.getTypeList() == False:
+                message = message + " não atômica) -> uso de sintaxe de lista atômica identificado na linha "
+                for lineNumber in i.getListLineNumber():
+                    message = message + " / " + str(lineNumber)
+            message = message + "</td></tr>"
 
     if checkExistenceGrammarTube(fileName) == False:
         message = message + "<tr><th>TUBE GRAMMAR()</th></tr> <tr><td>O tube grammar() não foi usado em nenhum momento neste template.</tr></td>"
