@@ -85,12 +85,14 @@ def collectAllTopics(fileName):
     name_all_topics = checkNamesAllTopics(fileName)
     targetFile = open(fileName, "r", encoding="utf-8")
     list_all_topics = []
+    topic_wrong_syntax = []
     for name in name_all_topics:
         line = targetFile.readline()
         while line:
             if line.find(name.getNameTopic()) != -1:
                 t = Topic()
                 topic = line
+                count_maximum = 1
                 count_opening = 1
                 count_closing = 0
                 line = targetFile.readline()
@@ -101,6 +103,10 @@ def collectAllTopics(fileName):
                     if line.find('}') != -1:
                         count_closing += 1
                     line = targetFile.readline()
+                    if count_maximum > 6000:
+                        topic_wrong_syntax.append('O tópico ' + name.getNameTopic() + ' contém número desigual entre chaves de abertura ( { ) e de fechamento ( } )')
+                        break
+                    count_maximum += 1
                 t.setCompleteTopic(topic)
                 t.setNameTopic(name.getNameTopic()[:name.getNameTopic().find(' ')])
                 list_all_topics.append(t)
@@ -371,7 +377,10 @@ def collectAllLists(fileName):
     while line:
         if line.find(listSyntax) != -1:
             l = List()
-            l.setListAlias(line[line.find('['):line.find(']') + 1])
+            if line.find('[') != -1:
+                l.setListAlias(line[line.find('['):line.find(']') + 1])
+            elif line.find('<') != -1:
+                l.setListAlias(line[line.find('<'):line.find('>') + 1])
             while line.find('atomic') == -1:
                 line = targetFile.readline()
             if 'true' in line:
@@ -519,6 +528,8 @@ def createReport(fileName):
         for i in list_topics_not_being_used:
             message = message + "<tr><td>" + i.getNameTopic()[:i.getNameTopic().find(']')+1] + "</td></tr>"
 
+    checkNamesAllTopics(fileName)
+
     list_empty_space_characters = checkExistenceEmptySpaceCharacter(fileName)
     if len(list_empty_space_characters) > 0:
         message = message + "<tr><th>LINHAS COM ESPAÇO ESPAÇO VAZIO</th></tr>"
@@ -533,11 +544,17 @@ def createReport(fileName):
             if i.getTypeList() == True:
                 message = message + " atômica) -> uso de sintaxe de lista não atômica identificado na linha "
                 for lineNumber in i.getListLineNumber():
-                    message = message + " / " + str(lineNumber)
+                    if i.getListLineNumber().index(lineNumber) == 0:
+                        message = message + " " + str(lineNumber)
+                    else:
+                        message = message + ", " + str(lineNumber)
             elif i.getTypeList() == False:
                 message = message + " não atômica) -> uso de sintaxe de lista atômica identificado na linha "
                 for lineNumber in i.getListLineNumber():
-                    message = message + " / " + str(lineNumber)
+                    if i.getListLineNumber().index(lineNumber) == 0:
+                        message = message + " " + str(lineNumber)
+                    else:
+                        message = message + ", " + str(lineNumber)
             message = message + "</td></tr>"
 
     if checkExistenceGrammarTube(fileName) == False:
