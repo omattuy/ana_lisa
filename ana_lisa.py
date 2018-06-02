@@ -443,6 +443,7 @@ def createReport(fileName):
             </style>
             </head> <body> <center><bold><h2>ANÁLISE DO TEMPLATE - """
 
+    shortFileName = ""
     if fileName.find("TEMP_") != -1:
         shortFileName = fileName[fileName.find("TEMP_"):len(fileName)]
     elif fileName.find("FRM_") != -1:
