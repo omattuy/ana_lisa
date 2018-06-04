@@ -6,14 +6,12 @@ import tkinter as tk
 from tkinter import filedialog
 import os.path
 
-# Abre possibilidade para que usuário selecione um arquivo
 def selectFile():
     root = tk.Tk()
     root.withdraw()
     fileName = filedialog.askopenfilename()
     return fileName
 
-# Verifica se há names com número de caracteres que sejam maiores que 100
 def checkNameSize(fileName):
     targetFile = open(fileName, "r", encoding="utf-8")
     list_Names = []
@@ -31,7 +29,6 @@ def checkNameSize(fileName):
     targetFile.close()
     return list_Names
 
-# Verifica se há requests com número de caracteres que sejam maiores que 100
 def checkRequestSize(fileName):
     targetFile = open(fileName, "r", encoding="utf-8")
     list_Requests = []
@@ -49,7 +46,6 @@ def checkRequestSize(fileName):
     targetFile.close()
     return list_Requests
 
-# Identifica a existência de FIXMEs
 def checkExistenceFixmes(fileName):
     targetFile = open(fileName, "r", encoding="utf-8")
     list_Fixmes = []
@@ -66,7 +62,6 @@ def checkExistenceFixmes(fileName):
     targetFile.close()
     return list_Fixmes
 
-# Identifica o nome de todos os tópicos no template
 def checkNamesAllTopics(fileName):
     targetFile = open(fileName, "r", encoding="utf-8")
     line = targetFile.readline()
@@ -80,7 +75,6 @@ def checkNamesAllTopics(fileName):
     targetFile.close()
     return name_all_topics
 
-# Coleta todos os tópicos no template
 def collectAllTopics(fileName):
     name_all_topics = checkNamesAllTopics(fileName)
     targetFile = open(fileName, "r", encoding="utf-8")
@@ -115,7 +109,6 @@ def collectAllTopics(fileName):
     targetFile.close()
     return list_all_topics
 
-# Coleta apenas os tópicos estáticos
 def collectOnlyStaticTopics(fileName):
     list_all_topics = collectAllTopics(fileName)
     list_static_topics = []
@@ -125,7 +118,6 @@ def collectOnlyStaticTopics(fileName):
                 list_static_topics.append(t)
     return list_static_topics
 
-# Coleta os tópicos com grande quantidade de parágrafos
 def collectTopicsLargeNumberParagraphs(fileName):
     list_all_topics = collectAllTopics(fileName)
     list_topics_large_number_paragraphs = []
@@ -135,7 +127,6 @@ def collectTopicsLargeNumberParagraphs(fileName):
                 list_topics_large_number_paragraphs.append(t)
     return list_topics_large_number_paragraphs
 
-# Coleta todos os tópicos não operados
 def collectTopicsNotBeingUsed(fileName):
     name_all_topics = checkNamesAllTopics(fileName)
     list_topics_not_being_used = []
@@ -153,7 +144,6 @@ def collectTopicsNotBeingUsed(fileName):
     targetFile.close()
     return list_topics_not_being_used
 
-# Identifica a existência de TODO
 def checkExistenceTodos(fileName):
     targetFile = open(fileName, "r", encoding="utf-8")
     list_Todos = []
@@ -170,7 +160,6 @@ def checkExistenceTodos(fileName):
     targetFile.close()
     return list_Todos
 
-# Identifica a existência de prints não finalizados
 def checkExistenceUnfinishedPrints(fileName):
     targetFile = open(fileName, "r", encoding="utf-8")
     list_unfinished_prints = []
@@ -186,7 +175,6 @@ def checkExistenceUnfinishedPrints(fileName):
     targetFile.close()
     return list_unfinished_prints
 
-# Identifica a existência do tube Grammar()
 def checkExistenceGrammarTube(fileName):
     targetFile = open(fileName, "r", encoding="utf-8")
     checkExistenceGrammar = False
@@ -199,7 +187,6 @@ def checkExistenceGrammarTube(fileName):
     targetFile.close()
     return checkExistenceGrammar
 
-# Identifica a existência de código comentado
 def checkExistenceComment(fileName):
     targetFile = open(fileName, "r", encoding="utf-8")
     lineNumber = 1
@@ -230,7 +217,6 @@ def checkExistenceComment(fileName):
     targetFile.close()
     return list_comments
 
-# Identifica a existência de statement no template
 def checkExistenceStatements(fileName):
     targetFile = open(fileName, "r", encoding="utf-8")
     checkExistenceStatement = False
@@ -243,7 +229,6 @@ def checkExistenceStatements(fileName):
     targetFile.close()
     return checkExistenceStatement
 
-# Identifica operandos declarados, mas não operados
 def collectAllVariablesAndCheckExistenceUnusedStructs(fileName):
 
     # Identifica todos os operandos declarados (tipo Struct apenas)
@@ -295,7 +280,6 @@ def collectAllVariablesAndCheckExistenceUnusedStructs(fileName):
     list_UnusedStructs = checkExistenceUnusedStructs(fileName)
     return list_UnusedStructs
 
-# Identifica operandos declarados, mas não operados
 def collectAllVariablesAndCheckExistenceUnusedVariables(fileName):
 
     # Identifica todos os operandos declarados (tipos primitivos apenas)
@@ -337,7 +321,6 @@ def collectAllVariablesAndCheckExistenceUnusedVariables(fileName):
     list_UnusedVariables = checkExistenceUnusedVariables(fileName)
     return list_UnusedVariables
 
-# Verifica se foi criado arquivo README
 def checkExistenceReadmeFile(fileName):
     readmeFileDoesNotExists = False
     if fileName.find("TEMP_") != -1:
@@ -353,7 +336,6 @@ def checkExistenceReadmeFile(fileName):
         readmeFileDoesNotExists = True
     return readmeFileDoesNotExists
 
-# Verifica a existência de espaços em branco ao final de cada linha
 def checkExistenceEmptySpaceCharacter(fileName):
     targetFile = open(fileName, "r", encoding="utf-8")
     list_empty_space_characters = []
@@ -368,7 +350,6 @@ def checkExistenceEmptySpaceCharacter(fileName):
     targetFile.close()
     return list_empty_space_characters
 
-# Coleta todos os fields de listas 
 def collectAllLists(fileName):
     targetFile = open(fileName, "r", encoding="utf-8")
     listSyntax = ': List'
@@ -392,7 +373,6 @@ def collectAllLists(fileName):
     targetFile.close()
     return list_lists
 
-# Identifica a existência de listas com sintaxe incorreta
 def checkListsWithIncorrectSyntax(fileName):
     list_lists = collectAllLists(fileName)
     targetFile = open(fileName, "r", encoding="utf-8")
@@ -424,7 +404,6 @@ def checkListsWithIncorrectSyntax(fileName):
     targetFile.close()
     return lists_with_incorrect_syntax
 
-# Criação de arquivo HTML com relatório das informações relevantes
 def createReport(fileName):
     f = open('Relatorio.html','w')
 
