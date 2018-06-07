@@ -1,18 +1,17 @@
 import webbrowser
 from comments import Comment
 from topics import Topic
+from lists import List
 import tkinter as tk
 from tkinter import filedialog
 import os.path
 
-# Abre possibilidade para que usuário selecione um arquivo
 def selectFile():
     root = tk.Tk()
     root.withdraw()
     fileName = filedialog.askopenfilename()
     return fileName
 
-# Verifica se há names com número de caracteres que sejam maiores que 100
 def checkNameSize(fileName):
     targetFile = open(fileName, "r", encoding="utf-8")
     list_Names = []
@@ -30,7 +29,6 @@ def checkNameSize(fileName):
     targetFile.close()
     return list_Names
 
-# Verifica se há requests com número de caracteres que sejam maiores que 100
 def checkRequestSize(fileName):
     targetFile = open(fileName, "r", encoding="utf-8")
     list_Requests = []
@@ -48,7 +46,6 @@ def checkRequestSize(fileName):
     targetFile.close()
     return list_Requests
 
-# Identifica a existência de FIXMEs
 def checkExistenceFixmes(fileName):
     targetFile = open(fileName, "r", encoding="utf-8")
     list_Fixmes = []
@@ -65,7 +62,6 @@ def checkExistenceFixmes(fileName):
     targetFile.close()
     return list_Fixmes
 
-# Identifica o nome de todos os tópicos no template
 def checkNamesAllTopics(fileName):
     targetFile = open(fileName, "r", encoding="utf-8")
     line = targetFile.readline()
@@ -79,17 +75,18 @@ def checkNamesAllTopics(fileName):
     targetFile.close()
     return name_all_topics
 
-# Coleta todos os tópicos no template
 def collectAllTopics(fileName):
     name_all_topics = checkNamesAllTopics(fileName)
     targetFile = open(fileName, "r", encoding="utf-8")
     list_all_topics = []
+    topic_wrong_syntax = []
     for name in name_all_topics:
         line = targetFile.readline()
         while line:
             if line.find(name.getNameTopic()) != -1:
                 t = Topic()
                 topic = line
+                count_maximum = 1
                 count_opening = 1
                 count_closing = 0
                 line = targetFile.readline()
@@ -100,6 +97,10 @@ def collectAllTopics(fileName):
                     if line.find('}') != -1:
                         count_closing += 1
                     line = targetFile.readline()
+                    if count_maximum > 6000:
+                        topic_wrong_syntax.append('O tópico ' + name.getNameTopic() + ' contém número desigual entre chaves de abertura ( { ) e de fechamento ( } )')
+                        break
+                    count_maximum += 1
                 t.setCompleteTopic(topic)
                 t.setNameTopic(name.getNameTopic()[:name.getNameTopic().find(' ')])
                 list_all_topics.append(t)
@@ -108,7 +109,6 @@ def collectAllTopics(fileName):
     targetFile.close()
     return list_all_topics
 
-# Coleta apenas os tópicos estáticos
 def collectOnlyStaticTopics(fileName):
     list_all_topics = collectAllTopics(fileName)
     list_static_topics = []
@@ -118,7 +118,6 @@ def collectOnlyStaticTopics(fileName):
                 list_static_topics.append(t)
     return list_static_topics
 
-# Coleta os tópicos com grande quantidade de parágrafos
 def collectTopicsLargeNumberParagraphs(fileName):
     list_all_topics = collectAllTopics(fileName)
     list_topics_large_number_paragraphs = []
@@ -128,7 +127,6 @@ def collectTopicsLargeNumberParagraphs(fileName):
                 list_topics_large_number_paragraphs.append(t)
     return list_topics_large_number_paragraphs
 
-# Coleta todos os tópicos não operados
 def collectTopicsNotBeingUsed(fileName):
     name_all_topics = checkNamesAllTopics(fileName)
     list_topics_not_being_used = []
@@ -146,7 +144,6 @@ def collectTopicsNotBeingUsed(fileName):
     targetFile.close()
     return list_topics_not_being_used
 
-# Identifica a existência de TODO
 def checkExistenceTodos(fileName):
     targetFile = open(fileName, "r", encoding="utf-8")
     list_Todos = []
@@ -163,7 +160,6 @@ def checkExistenceTodos(fileName):
     targetFile.close()
     return list_Todos
 
-# Identifica a existência de prints não finalizados
 def checkExistenceUnfinishedPrints(fileName):
     targetFile = open(fileName, "r", encoding="utf-8")
     list_unfinished_prints = []
@@ -179,7 +175,6 @@ def checkExistenceUnfinishedPrints(fileName):
     targetFile.close()
     return list_unfinished_prints
 
-# Identifica a existência do tube Grammar()
 def checkExistenceGrammarTube(fileName):
     targetFile = open(fileName, "r", encoding="utf-8")
     checkExistenceGrammar = False
@@ -192,7 +187,6 @@ def checkExistenceGrammarTube(fileName):
     targetFile.close()
     return checkExistenceGrammar
 
-# Identifica a existência de código comentado
 def checkExistenceComment(fileName):
     targetFile = open(fileName, "r", encoding="utf-8")
     lineNumber = 1
@@ -223,7 +217,6 @@ def checkExistenceComment(fileName):
     targetFile.close()
     return list_comments
 
-# Identifica a existência de statement no template
 def checkExistenceStatements(fileName):
     targetFile = open(fileName, "r", encoding="utf-8")
     checkExistenceStatement = False
@@ -236,7 +229,6 @@ def checkExistenceStatements(fileName):
     targetFile.close()
     return checkExistenceStatement
 
-# Identifica operandos declarados, mas não operados
 def collectAllVariablesAndCheckExistenceUnusedStructs(fileName):
 
     # Identifica todos os operandos declarados (tipo Struct apenas)
@@ -288,7 +280,6 @@ def collectAllVariablesAndCheckExistenceUnusedStructs(fileName):
     list_UnusedStructs = checkExistenceUnusedStructs(fileName)
     return list_UnusedStructs
 
-# Identifica operandos declarados, mas não operados
 def collectAllVariablesAndCheckExistenceUnusedVariables(fileName):
 
     # Identifica todos os operandos declarados (tipos primitivos apenas)
@@ -330,7 +321,6 @@ def collectAllVariablesAndCheckExistenceUnusedVariables(fileName):
     list_UnusedVariables = checkExistenceUnusedVariables(fileName)
     return list_UnusedVariables
 
-# Verifica se foi criado arquivo README
 def checkExistenceReadmeFile(fileName):
     readmeFileDoesNotExists = False
     if fileName.find("TEMP_") != -1:
@@ -346,7 +336,74 @@ def checkExistenceReadmeFile(fileName):
         readmeFileDoesNotExists = True
     return readmeFileDoesNotExists
 
-# Criação de arquivo HTML com relatório das informações relevantes
+def checkExistenceEmptySpaceCharacter(fileName):
+    targetFile = open(fileName, "r", encoding="utf-8")
+    list_empty_space_characters = []
+    line = targetFile.readline()
+    count = 1
+    while line:
+        if line[len(line) - 2] == ' ':
+            redFlag = "Linha " + str(count)
+            list_empty_space_characters.append(redFlag)
+        line = targetFile.readline()
+        count = count + 1
+    targetFile.close()
+    return list_empty_space_characters
+
+def collectAllLists(fileName):
+    targetFile = open(fileName, "r", encoding="utf-8")
+    listSyntax = ': List'
+    list_lists = []
+    line = targetFile.readline()
+    while line:
+        if line.find(listSyntax) != -1:
+            l = List()
+            if line.find('[') != -1:
+                l.setListAlias(line[line.find('['):line.find(']') + 1])
+            elif line.find('<') != -1:
+                l.setListAlias(line[line.find('<'):line.find('>') + 1])
+            while line.find('atomic') == -1:
+                line = targetFile.readline()
+            if 'true' in line:
+                l.setTypeList(True)
+            elif 'false' in line:
+                l.setTypeList(False)
+            list_lists.append(l)
+        line = targetFile.readline()
+    targetFile.close()
+    return list_lists
+
+def checkListsWithIncorrectSyntax(fileName):
+    list_lists = collectAllLists(fileName)
+    targetFile = open(fileName, "r", encoding="utf-8")
+    lists_with_incorrect_syntax = []
+    line = targetFile.readline()
+    for l in list_lists:
+        line = targetFile.readline()
+        lineNumber = 1
+        list_line_numbers = []
+        while line:
+            if line.find('.' + l.getListAlias()[1:len(l.getListAlias())-1]) != -1:
+                if l.getTypeList() == True and line.find('IN') != -1:
+                    if l not in lists_with_incorrect_syntax:
+                        list_line_numbers.append(lineNumber)
+                        l.setListLineNumber(list_line_numbers)
+                        lists_with_incorrect_syntax.append(l)
+                    else:
+                        l.getListLineNumber().append(lineNumber)
+                elif l.getTypeList() == False and line.find('IN') == -1:
+                    if l not in lists_with_incorrect_syntax:
+                        list_line_numbers.append(lineNumber)
+                        l.setListLineNumber(list_line_numbers)
+                        lists_with_incorrect_syntax.append(l)
+                    else:
+                        l.getListLineNumber().append(lineNumber)
+            line = targetFile.readline()
+            lineNumber = lineNumber + 1
+        targetFile.seek(0)
+    targetFile.close()
+    return lists_with_incorrect_syntax
+
 def createReport(fileName):
     f = open('Relatorio.html','w')
 
@@ -449,6 +506,35 @@ def createReport(fileName):
         message = message + "<tr><th>TÓPICOS NÃO UTILIZADOS NO TEMPLATE</th></tr>"
         for i in list_topics_not_being_used:
             message = message + "<tr><td>" + i.getNameTopic()[:i.getNameTopic().find(']')+1] + "</td></tr>"
+
+    checkNamesAllTopics(fileName)
+
+    list_empty_space_characters = checkExistenceEmptySpaceCharacter(fileName)
+    if len(list_empty_space_characters) > 0:
+        message = message + "<tr><th>LINHAS COM ESPAÇO ESPAÇO VAZIO</th></tr>"
+        for i in list_empty_space_characters:
+            message = message + "<tr><td>" + i + "</td></tr>"
+
+    lists_with_incorrect_syntax = checkListsWithIncorrectSyntax(fileName)
+    if len(lists_with_incorrect_syntax) > 0:
+        message = message + "<tr><th>LISTAS COM SINTAXE INCORRETA</th></tr>"
+        for i in lists_with_incorrect_syntax:
+            message = message + "<tr><td>" + i.getListAlias() + " (lista "
+            if i.getTypeList() == True:
+                message = message + " atômica) -> uso de sintaxe de lista não atômica identificado na linha "
+                for lineNumber in i.getListLineNumber():
+                    if i.getListLineNumber().index(lineNumber) == 0:
+                        message = message + " " + str(lineNumber)
+                    else:
+                        message = message + ", " + str(lineNumber)
+            elif i.getTypeList() == False:
+                message = message + " não atômica) -> uso de sintaxe de lista atômica identificado na linha "
+                for lineNumber in i.getListLineNumber():
+                    if i.getListLineNumber().index(lineNumber) == 0:
+                        message = message + " " + str(lineNumber)
+                    else:
+                        message = message + ", " + str(lineNumber)
+            message = message + "</td></tr>"
 
     if checkExistenceGrammarTube(fileName) == False:
         message = message + "<tr><th>TUBE GRAMMAR()</th></tr> <tr><td>O tube grammar() não foi usado em nenhum momento neste template.</tr></td>"
