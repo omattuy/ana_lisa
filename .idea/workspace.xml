@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="18d697a0-3adf-4782-ab47-2acbf82a5249" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ana_lisa.py" beforeDir="false" afterPath="$PROJECT_DIR$/ana_lisa.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ana_lisa_oop.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/errors.py" beforeDir="false" afterPath="$PROJECT_DIR$/errors.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patterns.py" beforeDir="false" afterPath="$PROJECT_DIR$/patterns.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pendencies.py" beforeDir="false" afterPath="$PROJECT_DIR$/pendencies.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,12 +20,20 @@
       <file leaf-file-name="ana_lisa_oop.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ana_lisa_oop.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="241" lean-forward="true" selection-start-line="241" selection-end-line="241" />
+            <state>
               <folding>
                 <element signature="e#0#17#0" expanded="true" />
-                <element signature="e#11228#12335#0" />
+                <element signature="e#11285#12392#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="patterns.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/patterns.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="38" column="22" selection-start-line="38" selection-start-column="22" selection-end-line="38" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -38,18 +49,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>line[</find>
-      <find>list_empty_space_characters</find>
-      <find>-1</find>
-      <find>checkListsWithIncorrectSyntax</find>
-      <find />
-      <find>TEMP_ContestaçãoTrabalhistaUnilever</find>
-      <find>metainfo</find>
-      <find>lineNumber</find>
-      <find>getlistlin</find>
-      <find>etListLineNumber</find>
-      <find>COUNT_B</find>
-      <find>+</find>
       <find>teste</find>
       <find>count_maximum</find>
       <find>name_all_topics = checkNamesAllTopics(fileName)</find>
@@ -68,6 +67,18 @@
       <find>fileName</find>
       <find>checkexistencered</find>
       <find>checkExistenceReadmeFile</find>
+      <find>selectFile</find>
+      <find>targetFile</find>
+      <find>createReport</find>
+      <find>FRM_</find>
+      <find>filename</find>
+      <find>checknamesize</find>
+      <find>checknamesi</find>
+      <find>checkRequestSize</find>
+      <find>checkNameSize</find>
+      <find>Comment()</find>
+      <find>Comment()</find>
+      <find>os.</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -86,7 +97,10 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/Bugs.py" />
         <option value="$PROJECT_DIR$/ana_lisa.py" />
+        <option value="$PROJECT_DIR$/errors.py" />
+        <option value="$PROJECT_DIR$/pendencies.py" />
         <option value="$PROJECT_DIR$/patterns.py" />
+        <option value="$PROJECT_DIR$/ana_lisa_oop.py" />
       </list>
     </option>
   </component>
@@ -100,6 +114,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -111,7 +126,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -233,12 +247,12 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.1420205" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.1420205" />
       <window_info anchor="bottom" id="TODO" order="10" />
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="3" />
       <window_info anchor="bottom" id="Python Console" order="0" weight="0.31848186" />
-      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.38283828" />
+      <window_info anchor="bottom" id="Run" order="6" weight="0.5561056" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="1" />
       <window_info id="Favorites" order="0" side_tool="true" />
@@ -257,34 +271,14 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="33" />
+      <option name="time" value="34" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lists.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Bugs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ana_lisa.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="12768">
           <caret line="532" selection-start-line="532" selection-end-line="532" />
-          <folding>
-            <element signature="e#0#17#0" expanded="true" />
-            <element signature="e#887#1443#0" />
-            <element signature="e#1485#1962#0" />
-            <element signature="e#2003#2408#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -299,12 +293,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="12840">
           <caret line="535" selection-start-line="535" selection-end-line="535" />
-          <folding>
-            <element signature="e#0#17#0" expanded="true" />
-            <element signature="e#887#1443#0" />
-            <element signature="e#1485#1962#0" />
-            <element signature="e#2003#2408#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -319,12 +307,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="12048">
           <caret line="502" column="84" selection-start-line="502" selection-start-column="84" selection-end-line="502" selection-end-column="84" />
-          <folding>
-            <element signature="e#0#17#0" expanded="true" />
-            <element signature="e#887#1443#0" />
-            <element signature="e#1485#1962#0" />
-            <element signature="e#2003#2408#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -339,12 +321,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2856">
           <caret line="119" lean-forward="true" selection-start-line="119" selection-end-line="119" />
-          <folding>
-            <element signature="e#0#17#0" expanded="true" />
-            <element signature="e#887#1443#0" />
-            <element signature="e#1485#1962#0" />
-            <element signature="e#2003#2408#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -359,12 +335,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="48">
           <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#17#0" expanded="true" />
-            <element signature="e#887#1443#0" />
-            <element signature="e#1485#1962#0" />
-            <element signature="e#2003#2408#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -602,19 +572,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ana_lisa.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="62" column="22" lean-forward="true" selection-start-line="48" selection-end-line="62" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#17#0" expanded="true" />
-            <element signature="e#887#1443#0" />
-            <element signature="e#1485#1962#0" />
-            <element signature="e#2003#2408#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lists.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="24">
@@ -622,20 +579,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ana_lisa.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="62" column="22" lean-forward="true" selection-end-line="553" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pendencies.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="1" column="8" lean-forward="true" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/patterns.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="50" column="4" selection-start-line="50" selection-start-column="4" selection-end-line="50" selection-end-column="4" />
+        <state relative-caret-position="105">
+          <caret line="38" column="22" selection-start-line="38" selection-start-column="22" selection-end-line="38" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/errors.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ana_lisa_oop.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="241" lean-forward="true" selection-start-line="241" selection-end-line="241" />
+        <state>
           <folding>
             <element signature="e#0#17#0" expanded="true" />
-            <element signature="e#11228#12335#0" />
+            <element signature="e#11285#12392#0" />
           </folding>
         </state>
       </provider>
