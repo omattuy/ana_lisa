@@ -6,8 +6,8 @@ class List:
 	def setListLineNumber (self, lineNumber):
 		self.lineNumber = lineNumber
 
-	def setTypeList (self, typeList):
-		self.typeList = typeList
+	def setAtomicList (self, typeAtomicList):
+		self.typeAtomicList = typeAtomicList
 
 	def getListAlias (self):
 		return self.alias
@@ -15,5 +15,5 @@ class List:
 	def getListLineNumber (self):
 		return self.lineNumber
 
-	def getTypeList (self):
-		return self.typeList
+	def getAtomicList (self):
+		return self.typeAtomicList
