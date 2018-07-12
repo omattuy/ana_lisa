@@ -1,4 +1,5 @@
 from topicanalysis import TopicAnalysis
+from repetitive_code import RepetitiveCode
 import os.path
 
 class Patterns:
@@ -62,7 +63,7 @@ class Patterns:
 	    return self.checkExistenceStatement
 
 	def checkExistenceReadmeFile(self):
-	    self.readmeFileDoesNotExists = False
+	    self.readmeFileDoesNotExist = False
 	    if self.fileName.find("TEMP_") != -1:
 	        filePath = self.fileName[:self.fileName.find("TEMP_")]
 	    elif self.fileName.find("FRM_") != -1:
@@ -73,8 +74,8 @@ class Patterns:
 	        filePath = self.fileName[:self.fileName.find("STRC_")]
 	    my_file = filePath + "README.txt"
 	    if os.path.isfile(my_file) == False:
-	        self.readmeFileDoesNotExists = True
-	    return self.readmeFileDoesNotExists
+	        self.readmeFileDoesNotExist = True
+	    return self.readmeFileDoesNotExist
 
 	def checkExistenceEmptySpaceCharacter(self):
 	    self.list_empty_space_characters = []
@@ -108,3 +109,44 @@ class Patterns:
 	            if t.getCompleteTopic().count('\p') > 10:
 	                self.list_topics_large_number_paragraphs.append(t)
 	    return self.list_topics_large_number_paragraphs
+
+	def checkExistenceRepetitiveLinesCode(self):
+		def getFourLinesCode():
+			idx = 0
+			list_four_lines_code = []
+			all_lines_of_file = self.targetFile.readlines()
+			while idx < len(all_lines_of_file):
+				self.four_lines_code = ""
+				rp = RepetitiveCode()
+				for i in range(4):
+					if idx < len(all_lines_of_file):
+						self.four_lines_code += all_lines_of_file[idx]
+						if i == 0:
+							self.first_line = idx
+							idx += 1
+						elif i == 3:
+							idx = self.first_line + 1
+						else:
+							idx += 1
+				rp.setNumberFirstLine(self.first_line)
+				rp.setFourLinesCode(self.four_lines_code)
+				list_four_lines_code.append(rp)
+			return list_four_lines_code
+
+		def checkEntireDocumentForRepetitiveCode(list_four_lines_code):
+			repetitive_section = []
+			for l in list_four_lines_code:
+				idx = 0
+				count = 0
+				while idx < len(list_four_lines_code):
+					if l.getFourLinesCode() == list_four_lines_code[idx].getFourLinesCode():
+						count += 1
+						if count >= 2:
+							repetitive_section.append(l)
+					idx += 1
+			return repetitive_section
+
+		list_four_lines_code = getFourLinesCode()
+		repetitive_section = checkEntireDocumentForRepetitiveCode(list_four_lines_code)
+		#for i in repetitive_section:
+		#	print(i.getFourLinesCode())

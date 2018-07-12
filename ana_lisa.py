@@ -58,6 +58,8 @@ def createReport(targetFile, fileName):
     # PATTERNS
     pt = Patterns(targetFile, fileName)
 
+    pt.checkExistenceRepetitiveLinesCode()
+
     list_Names = pt.checkNameSize()
     if len(list_Names) > 0:
         message = message + "<tr><th>NAMES COM MAIS DO QUE 100 CARACTERES</th></tr>"
@@ -120,7 +122,7 @@ def createReport(targetFile, fileName):
 
     list_comments = pd.checkExistenceComment()
     if len(list_comments) > 0:
-        message = message + "<tr><th>COMENTÁRIOS</th></tr>"
+        message = message + "b<tr><th>COMENTÁRIOS</th></tr>"
         for c in list_comments:
             message = message + "<tr><td>Linha " + str(c.getLineNumberBegComment()) + ": " + c.getCompleteComment() + "</tr></td>"
 
@@ -141,8 +143,7 @@ def createReport(targetFile, fileName):
 
     # ERRORS
     e = Errors(targetFile)
-    for l in e.collectAllLists():
-        print(l.getListAlias() + '\b')
+
     lists_with_incorrect_syntax = e.checkListsWithIncorrectSyntax()
     if len(lists_with_incorrect_syntax) > 0:
         message = message + "<tr><th>LISTAS COM SINTAXE INCORRETA</th></tr>"

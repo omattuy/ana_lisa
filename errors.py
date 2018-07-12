@@ -37,7 +37,7 @@ class Errors:
 			list_line_numbers = []
 			while line:
 				if line.find(l.getListAlias()) != -1 and line.find('if') != -1 and line.find('{') != -1:
-					print('debug -> ' + l.getListAlias() + ' ' + str(lineNumber))
+					#print('debug -> ' + l.getListAlias() + ' ' + str(lineNumber))
 					if l.getAtomicList() == True and line.find(' IN ') != -1:
 						if l not in self.lists_with_incorrect_syntax:
 							list_line_numbers.append(lineNumber)
