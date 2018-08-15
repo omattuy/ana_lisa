@@ -116,37 +116,37 @@ class Patterns:
 			list_four_lines_code = []
 			all_lines_of_file = self.targetFile.readlines()
 			while idx < len(all_lines_of_file):
-				self.four_lines_code = ""
 				rp = RepetitiveCode()
+				self.four_lines_code = ""
 				for i in range(4):
 					if idx < len(all_lines_of_file):
 						self.four_lines_code += all_lines_of_file[idx]
 						if i == 0:
-							self.first_line = idx
+							self.idx_first_line = idx
+							self.number_first_line = idx + 1
 							idx += 1
 						elif i == 3:
-							idx = self.first_line + 1
+							idx = self.idx_first_line + 1
 						else:
 							idx += 1
-				rp.setNumberFirstLine(self.first_line)
+				rp.setNumberFirstLine(self.number_first_line)
 				rp.setFourLinesCode(self.four_lines_code)
 				list_four_lines_code.append(rp)
 			return list_four_lines_code
 
 		def checkEntireDocumentForRepetitiveCode(list_four_lines_code):
 			repetitive_section = []
+			list_being_compared = list_four_lines_code
 			for l in list_four_lines_code:
 				idx = 0
-				count = 0
-				while idx < len(list_four_lines_code):
-					if l.getFourLinesCode() == list_four_lines_code[idx].getFourLinesCode():
-						count += 1
-						if count >= 2:
-							repetitive_section.append(l)
+				while idx < len(list_being_compared):
+					if : # TODO: Código incompleto 
+						repetitive_section.append(list_being_compared[idx])
 					idx += 1
 			return repetitive_section
 
 		list_four_lines_code = getFourLinesCode()
 		repetitive_section = checkEntireDocumentForRepetitiveCode(list_four_lines_code)
-		#for i in repetitive_section:
-		#	print(i.getFourLinesCode())
+		for i in list_four_lines_code:
+			print(i.getNumberFirstLine())
+			print(i.getFourLinesCode())
